@@ -4,6 +4,9 @@
     <title>AngularMovie</title>
 	<link rel="stylesheet" href="lib/bootstrap.css/css/bootstrap.min.css">
     <link rel="stylesheet" href="css/app.css">
+    <script src="lib/traceur-runtime/traceur-runtime.js"></script>
+    <script src="vendor/system.js"></script>
+    <script src="vendor/angular2.dev.js"></script>
 </head>
 <body>
 
@@ -84,6 +87,15 @@
     </ul>
 
 </section>
+<script>
+    System.defaultJSExtensions = true;
+    System.config({
+        map: {
+            rx: 'rx/dist/rx'
+        }
+    });
+    System.import('ts/bootstrap');
+</script>
 
 </body>
 </html>
