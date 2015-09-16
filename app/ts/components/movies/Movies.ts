@@ -1,11 +1,12 @@
 import {Component, View, NgFor} from 'angular2/angular2';
+import {RouterLink} from 'angular2/router'
 import {MovieFormComponent} from 'ts/components/movieForm/MovieFormComponent';
 @Component({
     selector: 'movies'
 })
 @View({
     templateUrl: 'ts/components/movies/movies.html',
-    directives: [NgFor,MovieFormComponent]
+    directives: [NgFor,MovieFormComponent,RouterLink]
 })
 export class MoviesComponent {
     name:string;
@@ -39,7 +40,7 @@ export class MoviesComponent {
         }).then((newMovie)=> {
             this.movies.push(newMovie);
         }).catch(function(ex) {
-            console.log('parsing failed', ex)
+            console.log('adding failed', ex)
         })
     }
     deleteMovie(index,movie){
@@ -53,7 +54,7 @@ export class MoviesComponent {
         }).then((response)=> {
             this.movies.splice(index, 1);
         }).catch(function(ex) {
-            console.log('parsing failed', ex)
+            console.log('deleting failed', ex)
         })
     }
 }

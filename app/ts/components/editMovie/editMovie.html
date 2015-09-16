@@ -1,0 +1,34 @@
+<div id="movie-form-edit">
+    <header class="modal-header">
+        <h3>Modifier le film</h3>
+    </header>
+    <section class="modal-body">
+        <form class="form-horizontal">
+            <div class="control-group">
+                <label class="control-label">Titre :</label>
+                <input type="text" [(ng-model)]="movie.title">
+            </div>
+            <div class="control-group">
+                <label class="control-label">Année de sortie :</label>
+                <input type="text" [(ng-model)]="movie.releaseYear">
+            </div>
+            <div class="control-group">
+                <label class="control-label">Réalisateur : </label>
+                <input type="text" [(ng-model)]="movie.directors">
+            </div>
+            <div class="control-group">
+                <label class="control-label">Acteurs :</label>
+                <input type="text" [(ng-model)]="movie.actors">
+            </div>
+            <div class="control-group">
+                <label class="control-label">Note :</label>
+                <input type="number" placeholder="entre 1 et 5" [(ng-model)]="movie.rate">
+            </div>
+        </form>
+    </section>
+    <footer>
+        <a [router-link]="['/movies']" data-dismiss="modal" class="btn btn-danger btn-small">Annuler</a>
+        <button class="btn btn-success" (click)="editMovie()">Modifier</button>
+    </footer>
+
+</div>
