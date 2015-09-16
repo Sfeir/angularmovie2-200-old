@@ -29,8 +29,6 @@ export class EditMovieComponent {
         return window.fetch('/api/movies/' + id)
             .then(function (response:Response) {
                 return response.json()
-            }).then(function (json:any) {
-                return json;
             }).catch(function (ex) {
                 console.log('parsing failed', ex)
             })
