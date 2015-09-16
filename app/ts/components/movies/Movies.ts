@@ -1,11 +1,11 @@
 import {Component, View, NgFor} from 'angular2/angular2';
-
+import {MovieFormComponent} from 'ts/components/movieForm/MovieFormComponent';
 @Component({
     selector: 'movies'
 })
 @View({
     templateUrl: 'ts/components/movies/movies.html',
-    directives: [NgFor]
+    directives: [NgFor,MovieFormComponent]
 })
 export class MoviesComponent {
     name:string;
@@ -53,5 +53,8 @@ export class MoviesComponent {
                 "rate":"5"
             }
         ];
+    }
+    addMovie(movie){
+        this.movies.push(movie);
     }
 }
