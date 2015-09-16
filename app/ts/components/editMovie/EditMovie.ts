@@ -1,5 +1,5 @@
 import {Component, View, FORM_DIRECTIVES, Inject} from 'angular2/angular2';
-import {Router,RouterLink,RouteParams,Location} from 'angular2/router'
+import {Router,RouterLink,RouteParams} from 'angular2/router'
 
 
 @Component({
@@ -12,12 +12,10 @@ import {Router,RouterLink,RouteParams,Location} from 'angular2/router'
 export class EditMovieComponent {
     id:string;
     router:Router;
-    location: Location;
     movie:any;
 
-    constructor(@Inject(Router)router, @Inject(RouteParams)routeParams,@Inject(Location)location) {
+    constructor(@Inject(Router)router, @Inject(RouteParams)routeParams) {
         this.router = router;
-        this.location = location;
         this.id = routeParams.get('id');
         this.movie = {};
         if (this.id) {
@@ -37,11 +35,6 @@ export class EditMovieComponent {
                 console.log('parsing failed', ex)
             })
     }
-
-    cancel() {
-        this.location.back();
-    }
-
     editMovie() {
 
         window.fetch('/api/movies', {
