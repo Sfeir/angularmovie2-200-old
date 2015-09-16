@@ -13,29 +13,16 @@
 <body>
 
 
-<!-- barre de navigation -->
-<header class="navbar navbar-fixed-top">
-    <div class="navbar-inner">
-        <section class="container">
-            <a class="brand" href="index.html">Angular2Movie</a>
-            <ul class="nav">
-                <li><a href="movie-list.html">Mes films</a></li>
-            </ul>
-        </section>
-    </div>
-</header>
+<movies-app></movies-app>
 
-
-<!-- partie principale -->
-<section class="container">
-    <home></home>
-</section>
-
+<script type="text/javascript" src="lib/jquery/jquery.js"></script>
+<script type="text/javascript" src="lib/bootstrap.css/js/bootstrap.js"></script>
+<script type="text/javascript" src="lib/fetch/fetch.js"></script>
 <script>
     System.config({
         packages: {'ts': {defaultExtension: 'js'}}
     });
-    System.import('ts/bootstrapHome');
+    System.import('ts/bootstrap');
 </script>
 
 </body>

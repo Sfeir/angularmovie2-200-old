@@ -1,6 +1,8 @@
-import {bootstrap} from 'angular2/angular2';
-import {HTTP_PROVIDERS} from 'angular2/http';
-import {MoviesComponent} from './components/movies/Movies';
+/// <reference path="../lib/tsd.d.ts" />
+
+import {bootstrap, bind} from 'angular2/angular2';
+import { ROUTER_BINDINGS, LocationStrategy, HashLocationStrategy} from 'angular2/router';
+import {App} from 'ts/app/App';
 
 
-bootstrap(MoviesComponent,[HTTP_PROVIDERS]);
+bootstrap(App,[ROUTER_BINDINGS,bind(LocationStrategy).toClass(HashLocationStrategy)]);
