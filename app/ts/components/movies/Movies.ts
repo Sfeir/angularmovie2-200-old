@@ -11,6 +11,7 @@ export class MoviesComponent {
     name:string;
     movies: any;
     constructor(){
+        this.movies=[];
         this.getMovies().then((response)=> {
             this.movies=response;
         })
