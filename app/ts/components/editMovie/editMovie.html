@@ -3,32 +3,38 @@
         <h3>Modifier le film</h3>
     </header>
     <section class="modal-body">
-        <form class="form-horizontal">
+        <form class="form-horizontal" #f="form">
             <div class="control-group">
                 <label class="control-label">Titre :</label>
-                <input type="text" [(ng-model)]="movie.title">
+                <input type="text" ng-control="title" [(ng-model)]="movie.title" required>
+                <div *ng-if="!isControlValid('title',f.form)">
+                    <span class="help-block">Ce champs est obligatoire</span>
+                </div>
             </div>
-            <div class="control-group">
+            <div class="control-group" [ng-class]="{error: !isControlValid('releaseYear',f.form)}">
                 <label class="control-label">Année de sortie :</label>
-                <input type="text" [(ng-model)]="movie.releaseYear">
+                <input type="text" ng-control="releaseYear" [(ng-model)]="movie.releaseYear" required>
+                <div *ng-if="!isControlValid('releaseYear',f.form)">
+                    <span class="help-block">Ce champs est obligatoire</span>
+                </div>
             </div>
             <div class="control-group">
                 <label class="control-label">Réalisateur : </label>
-                <input type="text" [(ng-model)]="movie.directors">
+                <input type="text" ng-control="directors" [(ng-model)]="movie.directors">
             </div>
             <div class="control-group">
                 <label class="control-label">Acteurs :</label>
-                <input type="text" [(ng-model)]="movie.actors">
+                <input type="text" ng-control="actors" [(ng-model)]="movie.actors">
             </div>
             <div class="control-group">
                 <label class="control-label">Note :</label>
-                <input type="number" placeholder="entre 1 et 5" [(ng-model)]="movie.rate">
+                <input type="number" placeholder="entre 1 et 5" ng-control="rate" [(ng-model)]="movie.rate">
             </div>
         </form>
     </section>
     <footer>
         <a [router-link]="['/movies']" data-dismiss="modal" class="btn btn-danger btn-small">Annuler</a>
-        <button class="btn btn-success" (click)="editMovie()">Modifier</button>
+        <button class="btn btn-success" [disabled]="!f.valid" (click)="editMovie()">Modifier</button>
     </footer>
 
 </div>

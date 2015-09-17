@@ -1,5 +1,5 @@
-import {Component, View, FORM_DIRECTIVES, Inject} from 'angular2/angular2';
-import {Router,RouterLink,RouteParams} from 'angular2/router'
+import {Component, View, FORM_DIRECTIVES,CORE_DIRECTIVES, Inject, ControlGroup} from 'angular2/angular2';
+import {Router,RouterLink,RouteParams} from 'angular2/router';
 
 
 @Component({
@@ -7,7 +7,7 @@ import {Router,RouterLink,RouteParams} from 'angular2/router'
 })
 @View({
     templateUrl: 'ts/components/editMovie/editMovie.html',
-    directives: [FORM_DIRECTIVES, RouterLink]
+    directives: [CORE_DIRECTIVES,FORM_DIRECTIVES, RouterLink]
 })
 export class EditMovieComponent {
     id:string;
@@ -24,7 +24,6 @@ export class EditMovieComponent {
             })
         }
     }
-
     getMovie(id:String) {
         return window.fetch('/api/movies/' + id)
             .then(function (response:Response) {
@@ -32,6 +31,13 @@ export class EditMovieComponent {
             }).catch(function (ex) {
                 console.log('parsing failed', ex)
             })
+    }
+    isControlValid(cName:string,form:ControlGroup) {
+        var isValid=true;
+        if(form.controls && form.controls[cName]){
+            isValid=form.controls[cName].valid;
+        }
+        return isValid;
     }
     editMovie() {
 
