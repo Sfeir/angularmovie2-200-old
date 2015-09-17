@@ -8,7 +8,7 @@ import {Router,RouterLink,RouteParams} from 'angular2/router'
 })
 @View({
     templateUrl: 'ts/components/editMovie/editMovie.html',
-    directives: [FORM_DIRECTIVES, RouterLink]
+    directives: [CORE_DIRECTIVES,FORM_DIRECTIVES, RouterLink]
 })
 export class EditMovieComponent {
     id:string;
