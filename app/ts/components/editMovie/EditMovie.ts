@@ -1,10 +1,11 @@
-import {Component, View, CORE_DIRECTIVES,FORM_DIRECTIVES, Inject, ControlGroup} from 'angular2/angular2';
+import {Component, View, FORM_DIRECTIVES,CORE_DIRECTIVES, Inject, ControlGroup,FormBuilder} from 'angular2/angular2';
 import {Http,Headers} from 'angular2/http';
-import {Router,RouterLink,RouteParams} from 'angular2/router'
+import {Router,RouterLink,RouteParams} from 'angular2/router';
 
 
 @Component({
-    selector: 'edit-movie'
+    selector: 'edit-movie',
+    viewBindings: [FormBuilder]
 })
 @View({
     templateUrl: 'ts/components/editMovie/editMovie.html',
@@ -15,8 +16,9 @@ export class EditMovieComponent {
     router:Router;
     movie:any;
     http:Http;
+    movieForm: ControlGroup;
 
-    constructor(@Inject(Router)router, @Inject(RouteParams)routeParams,@Inject(Http)http) {
+    constructor(@Inject(Router)router, @Inject(RouteParams)routeParams,@Inject(Http)http,@Inject(FormBuilder)builder) {
         this.router = router;
         this.http = http;
         this.id = routeParams.get('id');
