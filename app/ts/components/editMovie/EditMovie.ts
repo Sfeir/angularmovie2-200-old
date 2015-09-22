@@ -18,12 +18,39 @@ export class EditMovieComponent {
         this.router = router;
         this.id = routeParams.get('id');
         this.movie = {};
+        this.movieForm = builder.group(
+            {
+                title: ["", Validators.required],
+                releaseYear: ["", Validators.required],
+                directors: [""],
+                actors: [""],
+                rate: [""]
+            }
+        );
+
+
+
         if (this.id) {
             this.getMovie(this.id).then((response)=> {
                 this.movie = response;
+                this.movieForm.controls['title'].updateValue(this.movie.title);
+                this.movieForm.controls['releaseYear'].updateValue(this.movie.releaseYear);
+                this.movieForm.controls['directors'].updateValue(this.movie.directors);
+                this.movieForm.controls['actors'].updateValue(this.movie.actors);
+                this.movieForm.controls['rate'].updateValue(this.movie.rate);
             })
         }
     }
+
+    isControlValid(cName:string) {
+        var isValid=true;
+        if(this.movieForm.controls && this.movieForm.controls[cName]){
+            isValid=this.movieForm.controls[cName].valid;
+        }
+        return isValid;
+    }
+
+
     getMovie(id:String) {
         return window.fetch('/api/movies/' + id)
             .then(function (response:Response) {
@@ -32,14 +59,14 @@ export class EditMovieComponent {
                 console.log('parsing failed', ex)
             })
     }
-    isControlValid(cName:string,form:ControlGroup) {
-        var isValid=true;
-        if(form.controls && form.controls[cName]){
-            isValid=form.controls[cName].valid;
-        }
-        return isValid;
-    }
+
     editMovie() {
+
+        this.movie.title=this.movieForm.value.title;
+        this.movie.releaseYear=this.movieForm.value.releaseYear;
+        this.movie.directors=this.movieForm.value.directors;
+        this.movie.actors=this.movieForm.value.actors;
+        this.movie.rate=this.movieForm.value.rate;
 
         window.fetch('/api/movies', {
             method: 'put',
