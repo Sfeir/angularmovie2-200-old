@@ -1,4 +1,4 @@
-import {Component, View, FORM_DIRECTIVES,CORE_DIRECTIVES, Inject, ControlGroup, FormBuilder, Validators} from 'angular2/angular2';
+import {Component, View, FORM_DIRECTIVES,CORE_DIRECTIVES, Inject, ControlGroup, Control, FormBuilder, Validators} from 'angular2/angular2';
 import {Router,RouterLink,RouteParams} from 'angular2/router';
 
 
@@ -16,6 +16,34 @@ export class EditMovieComponent {
     movie:any;
     movieForm: ControlGroup;
 
+    getRangeNumberValidator(min, max) {
+        return function (c:Control):any {
+            if(c.value){
+                var val = parseInt(c.value);
+                //it's a number ?
+                if (isNaN(val)) {
+                    return {
+                        number: true
+                    }
+                }
+                //it's higher than min
+                if (val < min) {
+                    return {
+                        min: true
+                    }
+                }
+                //it's lower than max
+                if (val > max) {
+                    return {
+                        max: true
+                    }
+                }
+            }
+            // Null means valid
+            return null
+        };
+    }
+
     constructor(@Inject(Router)router, @Inject(RouteParams)routeParams, @Inject(FormBuilder)builder) {
 
         this.router = router;
@@ -27,7 +55,7 @@ export class EditMovieComponent {
                 releaseYear: ["", Validators.required],
                 directors: [""],
                 actors: [""],
-                rate: [""]
+                rate: ["",this.getRangeNumberValidator(1,5)]
             }
         );
 
