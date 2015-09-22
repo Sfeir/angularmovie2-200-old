@@ -1,9 +1,10 @@
-import {Component, View, FORM_DIRECTIVES,CORE_DIRECTIVES, Inject, ControlGroup} from 'angular2/angular2';
+import {Component, View, FORM_DIRECTIVES,CORE_DIRECTIVES, Inject, ControlGroup, FormBuilder, Validators} from 'angular2/angular2';
 import {Router,RouterLink,RouteParams} from 'angular2/router';
 
 
 @Component({
-    selector: 'edit-movie'
+    selector: 'edit-movie',
+    viewBindings: [FormBuilder]
 })
 @View({
     templateUrl: 'ts/components/editMovie/editMovie.html',
@@ -13,8 +14,10 @@ export class EditMovieComponent {
     id:string;
     router:Router;
     movie:any;
+    movieForm: ControlGroup;
 
-    constructor(@Inject(Router)router, @Inject(RouteParams)routeParams) {
+    constructor(@Inject(Router)router, @Inject(RouteParams)routeParams, @Inject(FormBuilder)builder) {
+
         this.router = router;
         this.id = routeParams.get('id');
         this.movie = {};
