@@ -28,7 +28,7 @@ export class EditMovieComponent {
                 releaseYear: ["", Validators.required],
                 directors: [""],
                 actors: [""],
-                rate: [""]
+                rate: ["",this.getRangeNumberValidator(1,5)]
             }
         );
 
@@ -71,5 +71,32 @@ export class EditMovieComponent {
             isValid=this.movieForm.controls[cName].valid;
         }
         return isValid;
+    }
+    getRangeNumberValidator(min, max) {
+        return function (c:Control):any {
+            if(c.value){
+                var val = parseInt(c.value);
+                //it's a number ?
+                if (isNaN(val)) {
+                    return {
+                        number: true
+                    }
+                }
+                //it's higher than min
+                if (val < min) {
+                    return {
+                        min: true
+                    }
+                }
+                //it's lower than max
+                if (val > max) {
+                    return {
+                        max: true
+                    }
+                }
+            }
+            // Null means valid
+            return null
+        };
     }
 }
