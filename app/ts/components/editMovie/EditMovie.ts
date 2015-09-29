@@ -1,10 +1,10 @@
 import {Component, View, FORM_DIRECTIVES,CORE_DIRECTIVES, Inject, ControlGroup, Control, FormBuilder, Validators} from 'angular2/angular2';
 import {Router,RouterLink,RouteParams} from 'angular2/router';
+import {MoviesService} from 'ts/services/MoviesService';
 
 
 @Component({
-    selector: 'edit-movie',
-    viewBindings: [FormBuilder]
+    selector: 'edit-movie'
 })
 @View({
     templateUrl: 'ts/components/editMovie/editMovie.html',
@@ -14,6 +14,7 @@ export class EditMovieComponent {
     id:string;
     router:Router;
     movie:any;
+    moviesService:MoviesService;
     movieForm: ControlGroup;
 
     getRangeNumberValidator(min, max) {
@@ -44,11 +45,12 @@ export class EditMovieComponent {
         };
     }
 
-    constructor(@Inject(Router)router, @Inject(RouteParams)routeParams, @Inject(FormBuilder)builder) {
+    constructor(@Inject(Router)router, @Inject(RouteParams)routeParams, @Inject(FormBuilder)builder,@Inject(MoviesService)moviesService) {
 
         this.router = router;
         this.id = routeParams.get('id');
         this.movie = {};
+        this.moviesService=moviesService;
         this.movieForm = builder.group(
             {
                 title: ["", Validators.required],
@@ -69,7 +71,7 @@ export class EditMovieComponent {
                 this.movieForm.controls['directors'].updateValue(this.movie.directors);
                 this.movieForm.controls['actors'].updateValue(this.movie.actors);
                 this.movieForm.controls['rate'].updateValue(this.movie.rate);
-            })
+            });
         }
     }
 
@@ -83,12 +85,7 @@ export class EditMovieComponent {
 
 
     getMovie(id:String) {
-        return window.fetch('/api/movies/' + id)
-            .then(function (response:Response) {
-                return response.json()
-            }).catch(function (ex) {
-                console.log('parsing failed', ex)
-            })
+        return this.moviesService.getMovie(this.id);
     }
 
     editMovie() {
@@ -99,17 +96,8 @@ export class EditMovieComponent {
         this.movie.actors=this.movieForm.value.actors;
         this.movie.rate=this.movieForm.value.rate;
 
-        window.fetch('/api/movies', {
-            method: 'put',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(this.movie)
-        }).then(()  => {
+        this.moviesService.updateMovie(this.movie).then(()  => {
             this.router.navigate('/movies');
-        }).catch((ex)=> {
-            console.log('updating failed', ex)
-        })
+        });
     }
 }
