@@ -1,6 +1,8 @@
-import {Component, View, NgFor} from 'angular2/angular2';
+import {Component, View, NgFor, Inject} from 'angular2/angular2';
 import {RouterLink} from 'angular2/router'
 import {MovieFormComponent} from 'ts/components/movieForm/MovieFormComponent';
+import {MoviesService} from 'ts/services/MoviesService';
+
 @Component({
     selector: 'movies'
 })
@@ -11,50 +13,27 @@ import {MovieFormComponent} from 'ts/components/movieForm/MovieFormComponent';
 export class MoviesComponent {
     name:string;
     movies: any;
-    constructor(){
+    moviesService: MoviesService;
+
+    constructor(@Inject(MoviesService)moviesService){
         this.movies=[];
-        this.getMovies().then((response)=> {
-            this.movies=response;
-        })
+        this.moviesService=moviesService;
+
+        this.getMovies();
     }
     getMovies(){
-        return window.fetch('/api/movies')
-            .then(function(response) {
-                return response.json()
-            }).then(function(json) {
-                return json;
-            }).catch(function(ex) {
-                console.log('parsing failed', ex)
-            })
+        this.moviesService.fetchMovies().then((response)=> {
+            this.movies=response;
+        });
     }
     addMovie(movie){
-        window.fetch('/api/movies', {
-            method: 'post',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(movie)
-        }).then(function(response) {
-            return response.json()
-        }).then((newMovie)=> {
+        this.moviesService.addMovie(movie).then((newMovie)=> {
             this.movies.push(newMovie);
-        }).catch(function(ex) {
-            console.log('adding failed', ex)
-        })
+        });
     }
     deleteMovie(index,movie){
-        window.fetch('/api/movies/'+movie.id, {
-            method: 'delete',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(movie)
-        }).then((response)=> {
+        this.moviesService.deleteMovie(index,movie).then(()=> {
             this.movies.splice(index, 1);
-        }).catch(function(ex) {
-            console.log('deleting failed', ex)
-        })
+        });
     }
 }
