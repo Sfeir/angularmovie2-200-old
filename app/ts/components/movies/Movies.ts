@@ -1,4 +1,4 @@
-import {Component, View, NgFor, Inject} from 'angular2/angular2';
+import {Component, View, CORE_DIRECTIVES, Inject} from 'angular2/angular2';
 import {RouterLink} from 'angular2/router'
 import {MovieFormComponent} from 'ts/components/movieForm/MovieFormComponent';
 import {MoviesService} from 'ts/services/MoviesService';
@@ -9,7 +9,7 @@ import {RatePipe} from 'ts/pipes/RatePipe';
 })
 @View({
     templateUrl: 'ts/components/movies/movies.html',
-    directives: [NgFor,MovieFormComponent,RouterLink],
+    directives: [CORE_DIRECTIVES,MovieFormComponent,RouterLink],
     pipes:[RatePipe]
 })
 export class MoviesComponent {
@@ -17,11 +17,13 @@ export class MoviesComponent {
     movies: any;
     moviesService: MoviesService;
     lastViewDate:Date;
+    displayTable:boolean;
 
     constructor(@Inject(MoviesService)moviesService){
         this.movies=[];
         this.moviesService=moviesService;
         this.lastViewDate=new Date();
+        this.displayTable=false;
         this.getMovies();
     }
     getMovies(){
@@ -38,5 +40,8 @@ export class MoviesComponent {
         this.moviesService.deleteMovie(index,movie).then(()=> {
             this.movies.splice(index, 1);
         });
+    }
+    switchDisplay(){
+        this.displayTable=!this.displayTable;
     }
 }
