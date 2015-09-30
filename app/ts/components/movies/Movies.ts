@@ -14,11 +14,12 @@ export class MoviesComponent {
     name:string;
     movies: any;
     moviesService: MoviesService;
+    lastViewDate:Date;
 
     constructor(@Inject(MoviesService)moviesService){
         this.movies=[];
         this.moviesService=moviesService;
-
+        this.lastViewDate=new Date();
         this.getMovies();
     }
     getMovies(){
