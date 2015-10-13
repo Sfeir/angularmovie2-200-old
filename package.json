@@ -1,0 +1,38 @@
+{
+  "name": "AngularMovie2-200",
+  "version": "1.0.0",
+  "description": "Live Coding & Hands On AngularJS 2",
+  "author": "Cyril Balit <balit.c@sfeir.com>",
+  "license": "MIT",
+  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Sfeir/angularmovie2-200"
+  },
+  "bugs": {
+    "url": "https://github.com/Sfeir/angularmovie2-200/issues"
+  },
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "angular2": "2.0.0-alpha.37",
+    "body-parser": "^1.6.2",
+    "express": "^4.8.2",
+    "grunt": "~0.4.1",
+    "grunt-autoprefixer": "~0.5.0",
+    "grunt-bower-install": "~0.7.0",
+    "grunt-contrib-clean": "~0.5.0",
+    "grunt-contrib-watch": "~0.5.2",
+    "grunt-express": "^1.4.1",
+    "load-grunt-tasks": "~0.2.0",
+    "lodash": "^3.10.1",
+    "method-override": "^2.1.2",
+    "rx": "^3.1.2",
+    "time-grunt": "~0.2.0"
+  },
+  "devDependencies": {
+    "grunt-ts": "^4.2.0-beta.1",
+    "typescript": "~1.5.0-beta"
+  }
+}
