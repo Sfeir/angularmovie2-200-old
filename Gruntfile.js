@@ -33,7 +33,7 @@ module.exports = function (grunt) {
         express: {
             options: {
                 port: 9000,
-                hostname: '*',
+                hostname: 'localhost',
                 server: path.resolve('./server/server.js')
             },
             livereload: {
@@ -55,7 +55,8 @@ module.exports = function (grunt) {
                 fast:'always',
                 options: {
                     experimentalDecorators:true,
-                    module: 'commonjs'
+                    module: 'commonjs',
+                    failOnTypeErrors: false
                 }
             }
         }
