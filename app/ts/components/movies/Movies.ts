@@ -3,13 +3,15 @@ import {RouterLink} from 'angular2/router'
 import {MovieFormComponent} from 'ts/components/movieForm/MovieFormComponent';
 import {MoviesService} from 'ts/services/MoviesService';
 import {RatePipe} from 'ts/pipes/RatePipe';
+import {Highlight} from 'ts/directives/Highlight';
+import {Lazy} from 'ts/directives/Lazy';
 
 @Component({
     selector: 'movies'
 })
 @View({
     templateUrl: 'ts/components/movies/movies.html',
-    directives: [CORE_DIRECTIVES,MovieFormComponent,RouterLink],
+    directives: [CORE_DIRECTIVES,MovieFormComponent,RouterLink,Highlight,Lazy],
     pipes:[RatePipe]
 })
 export class MoviesComponent {
@@ -43,5 +45,8 @@ export class MoviesComponent {
     }
     switchDisplay(){
         this.displayTable=!this.displayTable;
+    }
+    onChange(message){
+        alert('message:'+message)
     }
 }
