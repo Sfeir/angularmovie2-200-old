@@ -32,7 +32,7 @@
     "time-grunt": "~0.2.0"
   },
   "devDependencies": {
-    "grunt-ts": "^4.2.0-beta.1",
+    "grunt-ts": "^5.0",
     "typescript": "~1.5.0-beta"
   }
 }
