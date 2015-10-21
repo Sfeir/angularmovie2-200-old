@@ -38,7 +38,7 @@ module.exports = function (grunt) {
             },
             livereload: {
                 options: {
-                    livereload: true,
+                    livereload: false,
                     serverreload: false,
                     open:true,
                     bases: [path.resolve('./.tmp'), path.resolve(__dirname, '<%= yeoman.app %>')]
