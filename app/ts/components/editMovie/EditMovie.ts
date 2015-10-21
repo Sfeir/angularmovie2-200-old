@@ -1,6 +1,6 @@
 import {Component, View, FORM_DIRECTIVES,CORE_DIRECTIVES, Inject, ControlGroup, Control, FormBuilder, Validators} from 'angular2/angular2';
 import {Router,RouterLink,RouteParams} from 'angular2/router';
-import {MoviesService} from 'ts/services/MoviesService';
+import {MoviesService} from '../../services/MoviesService';
 
 
 @Component({
@@ -64,7 +64,7 @@ export class EditMovieComponent {
 
 
         if (this.id) {
-            this.getMovie(this.id).then((response)=> {
+            this.getMovie(this.id).subscribe((response)=> {
                 this.movie = response;
                 this.movieForm.controls['title'].updateValue(this.movie.title);
                 this.movieForm.controls['releaseYear'].updateValue(this.movie.releaseYear);
@@ -89,15 +89,15 @@ export class EditMovieComponent {
     }
 
     editMovie() {
-
         this.movie.title=this.movieForm.value.title;
         this.movie.releaseYear=this.movieForm.value.releaseYear;
         this.movie.directors=this.movieForm.value.directors;
         this.movie.actors=this.movieForm.value.actors;
         this.movie.rate=this.movieForm.value.rate;
 
-        this.moviesService.updateMovie(this.movie).then(()  => {
-            this.router.navigate('/movies');
+        this.moviesService.updateMovie(this.movie).subscribe(()  => {
+            var instruction = this.router.generate(['/Movies']);
+            this.router.navigateByInstruction(instruction);
         });
     }
 }

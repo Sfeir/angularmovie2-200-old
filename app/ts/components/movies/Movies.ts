@@ -1,10 +1,10 @@
 import {Component, View, CORE_DIRECTIVES, Inject} from 'angular2/angular2';
 import {RouterLink} from 'angular2/router'
-import {MovieFormComponent} from 'ts/components/movieForm/MovieFormComponent';
-import {MoviesService} from 'ts/services/MoviesService';
-import {RatePipe} from 'ts/pipes/RatePipe';
-import {Highlight} from 'ts/directives/Highlight';
-import {Lazy} from 'ts/directives/Lazy';
+import {MovieFormComponent} from '../movieForm/MovieFormComponent';
+import {MoviesService} from '../../services/MoviesService';
+import {RatePipe} from '../../pipes/RatePipe';
+import {Highlight} from '../../directives/Highlight';
+import {Lazy} from '../../directives/Lazy';
 
 @Component({
     selector: 'movies'
@@ -29,17 +29,17 @@ export class MoviesComponent {
         this.getMovies();
     }
     getMovies(){
-        this.moviesService.fetchMovies().then((response)=> {
-            this.movies=response;
+        this.moviesService.fetchMovies().subscribe((movies)=>{
+            this.movies=movies;
         });
     }
     addMovie(movie){
-        this.moviesService.addMovie(movie).then((newMovie)=> {
+        this.moviesService.addMovie(movie).subscribe((newMovie)=> {
             this.movies.push(newMovie);
         });
     }
     deleteMovie(index,movie){
-        this.moviesService.deleteMovie(index,movie).then(()=> {
+        this.moviesService.deleteMovie(index,movie).subscribe(()=> {
             this.movies.splice(index, 1);
         });
     }

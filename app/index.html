@@ -5,9 +5,11 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" href="lib/bootstrap.css/css/bootstrap.min.css">
     <link rel="stylesheet" href="css/app.css">
-    <script src="lib/traceur-runtime/traceur-runtime.js"></script>
-    <script src="vendor/system.js"></script>
-    <script src="vendor/angular2.dev.js"></script>
+    <script src="es6-shim/es6-shim.js"></script>
+    <script src="systemjs/dist/system.src.js"></script>
+    <script src="angular2/bundles/angular2.dev.js"></script>
+    <script src="angular2/bundles/router.dev.js"></script>
+    <script src="https://code.angularjs.org/2.0.0-alpha.42/http.min.js"></script>
 </head>
 <body>
 
@@ -18,11 +20,8 @@
 <script type="text/javascript" src="lib/bootstrap.css/js/bootstrap.js"></script>
 <script type="text/javascript" src="lib/fetch/fetch.js"></script>
 <script>
-    System.defaultJSExtensions = true;
     System.config({
-        map: {
-            rx: 'rx/dist/rx'
-        }
+        packages: {'ts': {defaultExtension: 'js'}}
     });
     System.import('ts/bootstrap');
 </script>

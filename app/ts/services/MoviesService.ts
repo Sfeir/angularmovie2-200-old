@@ -1,63 +1,24 @@
-import { bind, Injector } from 'angular2/angular2';
-
+import { Injectable,Inject} from 'angular2/angular2';
+import {Http,Headers} from 'angular2/http';
+@Injectable()
 export class MoviesService {
-
+    http:Http;
+    constructor(@Inject(Http)http) {
+        this.http = http;
+    }
     fetchMovies() {
-        return window.fetch('/api/movies')
-            .then(function(response) {
-                return response.json()
-            }).catch(function(ex) {
-                console.log('parsing failed', ex)
-            })
+        return this.http.get('api/movies').map(res => res.json());
     }
     getMovie(id:string) {
-        return window.fetch('/api/movies/' + id)
-            .then(function (response:Response) {
-                return response.json()
-            }).catch(function (ex) {
-                console.log('parsing failed', ex)
-            })
+        return this.http.get('api/movies/'+id).map(res => res.json());
     }
     addMovie(movie){
-        var _this=this;
-        return window.fetch('/api/movies', {
-            method: 'post',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(movie)
-        }).then(function(response) {
-            return response.json()
-        }).catch(function(ex) {
-            console.log('parsing failed', ex)
-        })
+        return this.http.post('api/movies',JSON.stringify(movie)).map(res => res.json());
     }
     updateMovie(movie){
-        return window.fetch('/api/movies', {
-            method: 'put',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(movie)
-        }).then(function (response:Response) {
-            return response.json()
-        }).catch((ex)=> {
-            console.log('parsing failed', ex)
-        })
+        return this.http.put('api/movies',JSON.stringify(movie),{headers: new Headers({'Content-Type': 'application/json'})});
     }
     deleteMovie(index,movie){
-        var _this=this;
-        return window.fetch('/api/movies/'+movie.id, {
-            method: 'delete',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(movie)
-        }).catch(function(ex) {
-            console.log('parsing failed', ex)
-        })
+        return this.http.delete('api/movies/'+movie.id);
     }
 }
