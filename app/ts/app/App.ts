@@ -17,6 +17,6 @@ import {MoviesComponent} from '../components/movies/Movies'
 ])
 export class App {
     constructor(@Inject(Router)router) {
-        //router.navigate('/home');
+
     }
 }
