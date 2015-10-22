@@ -1,5 +1,5 @@
 import {Component, View, NgFor, Inject} from 'angular2/angular2';
-import {Http} from 'angular2/http';
+import {Http,Headers} from 'angular2/http';
 import {MovieFormComponent} from '../movieForm/MovieFormComponent';
 
 @Component({
@@ -28,7 +28,7 @@ export class MoviesComponent {
     }
 
     addMovie(movie) {
-        this.http.post('api/movies', JSON.stringify(movie)).map(res => res.json())
+        this.http.post('api/movies', JSON.stringify(movie),{headers: new Headers({'Content-Type': 'application/json'})}).map(res => res.json())
             .subscribe((newMovie)=> {
                 this.movies.push(newMovie);
             });
