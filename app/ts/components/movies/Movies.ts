@@ -1,45 +1,36 @@
-import {Component, View, NgFor} from 'angular2/angular2';
+import {Component, View, NgFor, Inject} from 'angular2/angular2';
+import {Http} from 'angular2/http';
 import {MovieFormComponent} from '../movieForm/MovieFormComponent';
+
 @Component({
     selector: 'movies'
 })
 @View({
     templateUrl: 'ts/components/movies/movies.html',
-    directives: [NgFor,MovieFormComponent]
+    directives: [NgFor, MovieFormComponent]
 })
 export class MoviesComponent {
     name:string;
-    movies: any;
-    constructor(){
-        this.movies=[];
-        this.getMovies().then((response)=> {
-            this.movies=response;
-        })
+    movies:any;
+    http:Http;
+
+    constructor(@Inject(Http)http) {
+        this.http = http;
+        this.movies = [];
+        this.getMovies();
     }
-    getMovies(){
-        return window.fetch('/api/movies')
-            .then(function(response) {
-                return response.json()
-            }).then(function(json) {
-                return json;
-            }).catch(function(ex) {
-                console.log('parsing failed', ex)
-            })
+
+    getMovies() {
+            this.http.get('api/movies').map(res => res.json())
+            .subscribe((movies)=> {
+                this.movies = movies;
+            });
     }
-    addMovie(movie){
-        window.fetch('/api/movies', {
-            method: 'post',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(movie)
-        }).then(function(response) {
-            return response.json()
-        }).then((newMovie)=> {
-            this.movies.push(newMovie);
-        }).catch(function(ex) {
-            console.log('parsing failed', ex)
-        })
+
+    addMovie(movie) {
+        this.http.post('api/movies', JSON.stringify(movie)).map(res => res.json())
+            .subscribe((newMovie)=> {
+                this.movies.push(newMovie);
+            });
     }
 }
