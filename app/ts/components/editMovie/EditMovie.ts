@@ -1,4 +1,4 @@
-import {Component, View, CORE_DIRECTIVES,FORM_DIRECTIVES, Inject} from 'angular2/angular2';
+import {Component, View, CORE_DIRECTIVES,FORM_DIRECTIVES, Inject, ControlGroup} from 'angular2/angular2';
 import {Http,Headers} from 'angular2/http';
 import {Router,RouterLink,RouteParams} from 'angular2/router'
 
