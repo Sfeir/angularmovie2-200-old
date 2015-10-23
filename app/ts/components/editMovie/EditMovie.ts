@@ -4,8 +4,7 @@ import {Router,RouterLink,RouteParams} from 'angular2/router';
 
 
 @Component({
-    selector: 'edit-movie',
-    viewBindings: [FormBuilder]
+    selector: 'edit-movie'
 })
 @View({
     templateUrl: 'ts/components/editMovie/editMovie.html',
