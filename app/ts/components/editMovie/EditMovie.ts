@@ -1,4 +1,5 @@
 import {Component, View, FORM_DIRECTIVES, Inject} from 'angular2/angular2';
+import {Http,Headers} from 'angular2/http';
 import {Router,RouterLink,RouteParams} from 'angular2/router'
 
 
@@ -13,39 +14,30 @@ export class EditMovieComponent {
     id:string;
     router:Router;
     movie:any;
+    http:Http;
 
-    constructor(@Inject(Router)router, @Inject(RouteParams)routeParams) {
+    constructor(@Inject(Router)router, @Inject(RouteParams)routeParams,@Inject(Http)http) {
         this.router = router;
+        this.http = http;
         this.id = routeParams.get('id');
         this.movie = {};
         if (this.id) {
-            this.getMovie(this.id).then((response)=> {
-                this.movie = response;
-            })
+            this.getMovie(this.id);
         }
     }
 
     getMovie(id:String) {
-        return window.fetch('/api/movies/' + id)
-            .then(function (response:Response) {
-                return response.json()
-            }).catch(function (ex) {
-                console.log('parsing failed', ex)
-            })
+        this.http.get('api/movies/' + id)
+            .map(res => res.json())
+            .subscribe((movie)=> {
+                this.movie = movie;
+            });
     }
     editMovie() {
-
-        window.fetch('/api/movies', {
-            method: 'put',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(this.movie)
-        }).then(()  => {
-            this.router.navigate('/movies');
-        }).catch((ex)=> {
-            console.log('updating failed', ex)
-        })
+        this.http.put('api/movies', JSON.stringify(this.movie), {headers: new Headers({'Content-Type': 'application/json'})})
+            .subscribe((newMovie)=> {
+                var instruction = this.router.generate(['/Movies']);
+                this.router.navigateByInstruction(instruction);
+            });
     }
 }
