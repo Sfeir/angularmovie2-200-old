@@ -1,4 +1,5 @@
-import {Component, View, FORM_DIRECTIVES,CORE_DIRECTIVES, Inject, ControlGroup} from 'angular2/angular2';
+import {Component, View, FORM_DIRECTIVES,CORE_DIRECTIVES, Inject, ControlGroup,FormBuilder,Validators} from 'angular2/angular2';
+import {Http,Headers} from 'angular2/http';
 import {Router,RouterLink,RouteParams} from 'angular2/router';
 
 
@@ -13,9 +14,12 @@ export class EditMovieComponent {
     id:string;
     router:Router;
     movie:any;
+    http:Http;
+    movieForm: ControlGroup;
 
-    constructor(@Inject(Router)router, @Inject(RouteParams)routeParams) {
+    constructor(@Inject(Router)router, @Inject(RouteParams)routeParams,@Inject(Http)http,@Inject(FormBuilder)builder) {
         this.router = router;
+        this.http = http;
         this.id = routeParams.get('id');
         this.movie = {};
         this.movieForm = builder.group(
@@ -31,54 +35,41 @@ export class EditMovieComponent {
 
 
         if (this.id) {
-            this.getMovie(this.id).then((response)=> {
-                this.movie = response;
+            this.getMovie(this.id);
+        }
+    }
+
+    getMovie(id:String) {
+        this.http.get('api/movies/' + id)
+            .map(res => res.json())
+            .subscribe((movie)=> {
+                this.movie = movie;
                 this.movieForm.controls['title'].updateValue(this.movie.title);
                 this.movieForm.controls['releaseYear'].updateValue(this.movie.releaseYear);
                 this.movieForm.controls['directors'].updateValue(this.movie.directors);
                 this.movieForm.controls['actors'].updateValue(this.movie.actors);
                 this.movieForm.controls['rate'].updateValue(this.movie.rate);
-            })
-        }
+            });
     }
-
-    isControlValid(cName:string) {
-        var isValid=true;
-        if(this.movieForm.controls && this.movieForm.controls[cName]){
-            isValid=this.movieForm.controls[cName].valid;
-        }
-        return isValid;
-    }
-
-
-    getMovie(id:String) {
-        return window.fetch('/api/movies/' + id)
-            .then(function (response:Response) {
-                return response.json()
-            }).catch(function (ex) {
-                console.log('parsing failed', ex)
-            })
-    }
-
     editMovie() {
-
         this.movie.title=this.movieForm.value.title;
         this.movie.releaseYear=this.movieForm.value.releaseYear;
         this.movie.directors=this.movieForm.value.directors;
         this.movie.actors=this.movieForm.value.actors;
         this.movie.rate=this.movieForm.value.rate;
 
-        window.fetch('/api/movies', {
-            method: 'put',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(this.movie)
-        }).then(()  => {
-            this.router.navigate('/movies');
-        }).catch((ex)=> {
-            console.log('updating failed', ex)
-        })
+
+        this.http.put('api/movies', JSON.stringify(this.movie), {headers: new Headers({'Content-Type': 'application/json'})})
+            .subscribe((newMovie)=> {
+                var instruction = this.router.generate(['/Movies']);
+                this.router.navigateByInstruction(instruction);
+            });
+    }
+    isControlValid(cName:string,form:ControlGroup) {
+        var isValid=true;
+        if(this.movieForm.controls && this.movieForm.controls[cName]){
+            isValid=this.movieForm.controls[cName].valid;
+        }
+        return isValid;
     }
 }
