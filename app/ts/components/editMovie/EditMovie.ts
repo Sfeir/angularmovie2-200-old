@@ -1,6 +1,8 @@
 import {Component, View, FORM_DIRECTIVES,CORE_DIRECTIVES, Inject, ControlGroup,FormBuilder,Validators,Control} from 'angular2/angular2';
 import {Http,Headers} from 'angular2/http';
 import {Router,RouterLink,RouteParams} from 'angular2/router';
+import {MoviesService} from '../../services/MoviesService';
+
 
 
 @Component({
@@ -16,10 +18,12 @@ export class EditMovieComponent {
     movie:any;
     http:Http;
     movieForm: ControlGroup;
+    moviesService:MoviesService;
 
-    constructor(@Inject(Router)router, @Inject(RouteParams)routeParams,@Inject(Http)http,@Inject(FormBuilder)builder) {
+    constructor(@Inject(Router)router, @Inject(RouteParams)routeParams,@Inject(Http)http,@Inject(FormBuilder)builder,@Inject(MoviesService)moviesService) {
         this.router = router;
         this.http = http;
+        this.moviesService=moviesService;
         this.id = routeParams.get('id');
         this.movie = {};
         this.movieForm = builder.group(
@@ -40,8 +44,7 @@ export class EditMovieComponent {
     }
 
     getMovie(id:String) {
-        this.http.get('api/movies/' + id)
-            .map(res => res.json())
+        this.moviesService.getMovie(this.id)
             .subscribe((movie)=> {
                 this.movie = movie;
                 this.movieForm.controls['title'].updateValue(this.movie.title);
@@ -59,11 +62,10 @@ export class EditMovieComponent {
         this.movie.rate=this.movieForm.value.rate;
 
 
-        this.http.put('api/movies', JSON.stringify(this.movie), {headers: new Headers({'Content-Type': 'application/json'})})
-            .subscribe((newMovie)=> {
-                var instruction = this.router.generate(['/Movies']);
-                this.router.navigateByInstruction(instruction);
-            });
+        this.moviesService.updateMovie(this.movie).subscribe(()  => {
+            var instruction = this.router.generate(['/Movies']);
+            this.router.navigateByInstruction(instruction);
+        });
     }
     isControlValid(cName:string,form:ControlGroup) {
         var isValid=true;

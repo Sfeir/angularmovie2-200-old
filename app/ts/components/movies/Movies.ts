@@ -2,6 +2,7 @@ import {Component, View, NgFor, Inject} from 'angular2/angular2';
 import {Http,Headers} from 'angular2/http';
 import {RouterLink} from 'angular2/router'
 import {MovieFormComponent} from '../movieForm/MovieFormComponent';
+import {MoviesService} from '../../services/MoviesService';
 
 @Component({
     selector: 'movies'
@@ -14,34 +15,29 @@ export class MoviesComponent {
     name:string;
     movies:any;
     http:Http;
+    moviesService: MoviesService;
 
-    constructor(@Inject(Http)http) {
+    constructor(@Inject(Http)http,@Inject(MoviesService)moviesService) {
         this.http = http;
+        this.moviesService=moviesService;
         this.movies = [];
         this.getMovies();
     }
 
-    getMovies() {
-        this.http.get('api/movies')
-            .map(res => res.json())
-            .subscribe((movies)=> {
-                this.movies = movies;
-            });
+    getMovies(){
+        this.moviesService.fetchMovies().subscribe((movies)=>{
+            this.movies=movies;
+        });
     }
-
-    addMovie(movie) {
-        this.http.post('api/movies', JSON.stringify(movie), {headers: new Headers({'Content-Type': 'application/json'})})
-            .map(res => res.json())
-            .subscribe((newMovie)=> {
-                this.movies.push(newMovie);
-            });
+    addMovie(movie){
+        this.moviesService.addMovie(movie).subscribe((newMovie)=> {
+            this.movies.push(newMovie);
+        });
     }
-
-    deleteMovie(index, movie) {
-        this.http.get('/api/movies/' + movie.id)
-            .subscribe((resp)=> {
-                this.movies.splice(index, 1);
-            });
+    deleteMovie(index,movie){
+        this.moviesService.deleteMovie(index,movie).subscribe(()=> {
+            this.movies.splice(index, 1);
+        });
     }
 
 }
