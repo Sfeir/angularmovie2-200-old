@@ -16,11 +16,13 @@ export class MoviesComponent {
     movies:any;
     http:Http;
     moviesService: MoviesService;
+    lastViewDate:Date;
 
     constructor(@Inject(Http)http,@Inject(MoviesService)moviesService) {
         this.http = http;
         this.moviesService=moviesService;
         this.movies = [];
+        this.lastViewDate=new Date();
         this.getMovies();
     }
 
