@@ -1,4 +1,4 @@
-import {Component, View, FORM_DIRECTIVES, Inject} from 'angular2/angular2';
+import {Component, View, CORE_DIRECTIVES,FORM_DIRECTIVES, Inject} from 'angular2/angular2';
 import {Http,Headers} from 'angular2/http';
 import {Router,RouterLink,RouteParams} from 'angular2/router'
 
@@ -25,7 +25,6 @@ export class EditMovieComponent {
             this.getMovie(this.id);
         }
     }
-
     getMovie(id:String) {
         this.http.get('api/movies/' + id)
             .map(res => res.json())
@@ -39,5 +38,12 @@ export class EditMovieComponent {
                 var instruction = this.router.generate(['/Movies']);
                 this.router.navigateByInstruction(instruction);
             });
+    }
+    isControlValid(cName:string,form:ControlGroup) {
+        var isValid=true;
+        if(form.controls && form.controls[cName]){
+            isValid=form.controls[cName].valid;
+        }
+        return isValid;
     }
 }
