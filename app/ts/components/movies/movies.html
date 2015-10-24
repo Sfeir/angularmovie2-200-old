@@ -40,7 +40,8 @@
             <li *ng-for="#movie of movies;#i = index" class="movieResult" class="span12">
                 <img [src]="movie.poster || 'img/no-poster.jpg'" class="span2">
                 <div class="caption">
-                    <h3 highlight message="{{movie.synopsis}}">{{movie.title | uppercase}}
+                    <h3>
+                        <span highlight message="{{movie.synopsis}}">{{movie.title | uppercase}}</span>
                         <button class="btn btn-danger" (click)="deleteMovie(i,movie)"><i class="icon-trash icon-white"></i></button>
                         <a class="btn btn-info" [router-link]="['/Editmovie',{id:movie.id}]"><i class="icon-edit icon-white"></i></a>
                     </h3>

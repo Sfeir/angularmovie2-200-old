@@ -1,4 +1,5 @@
 import {Directive, ElementRef,EventEmitter,Inject} from 'angular2/angular2';
+import {Http} from 'angular2/http';
 
 @Directive({
     selector: '[lazy]',
@@ -13,19 +14,18 @@ export class Lazy {
     hasLoad:boolean;
     url:string;
     element:ElementRef;
+    http:Http;
 
-    constructor(@Inject(ElementRef)element) {
+    constructor(@Inject(ElementRef)element,@Inject(Http)http) {
         this.element = element;
+        this.http = http;
     }
 
     load() {
         if (!this.hasLoad) {
-            window.fetch(this.url)
-                .then((response:Response) => {
-                    return response.json();
-                }).then((data)=>{
-                    this.setInner(data);
-                });
+            this.http.get(this.url).map(res => res.json()).subscribe((data)=> {
+                this.setInner(data);
+            });
         }
     }
 
