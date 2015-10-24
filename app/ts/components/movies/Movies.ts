@@ -3,13 +3,15 @@ import {Http,Headers} from 'angular2/http';
 import {RouterLink} from 'angular2/router'
 import {MovieFormComponent} from '../movieForm/MovieFormComponent';
 import {MoviesService} from '../../services/MoviesService';
+import {RatePipe} from '../../pipes/RatePipe';
 
 @Component({
     selector: 'movies'
 })
 @View({
     templateUrl: 'ts/components/movies/movies.html',
-    directives: [NgFor, MovieFormComponent,RouterLink]
+    directives: [NgFor, MovieFormComponent,RouterLink],
+    pipes:[RatePipe]
 })
 export class MoviesComponent {
     name:string;
