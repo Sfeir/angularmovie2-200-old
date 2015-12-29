@@ -1,5 +1,5 @@
 import {Component} from 'angular2/core';
-import {FORM_DIRECTIVES} from 'angular2/common';
+import {CORE_DIRECTIVES, FORM_DIRECTIVES} from 'angular2/common';
 import {Router,RouterLink,RouteParams} from 'angular2/router'
 import {Http,Headers} from 'angular2/http';
 
@@ -13,8 +13,6 @@ export class EditMovieComponent {
     router:Router;
     http:Http;
     movie:any;
-    http:Http;
-    movieForm: ControlGroup;
 
     constructor(router:Router,routeParams:RouteParams,http:Http) {
         this.router = router;
