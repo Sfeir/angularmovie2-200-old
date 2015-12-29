@@ -6,36 +6,30 @@
         <form class="form-horizontal" [ng-form-model]="movieForm">
             <div class="control-group" [ng-class]="{error: !isControlValid('title')}">
                 <label class="control-label">Titre :</label>
-                <input type="text" ng-control="title">
-                <div *ng-if="!movieForm.controls.title.valid">
-                    <span class="help-block">Ce champs est obligatoire</span>
-                </div>
+                <input type="text" [(ngModel)]="movie.title">
             </div>
             <div class="control-group" [ng-class]="{error: !isControlValid('releaseYear')}">
                 <label class="control-label">Année de sortie :</label>
-                <input type="text" ng-control="releaseYear">
-                <div *ng-if="!movieForm.controls.releaseYear.valid">
-                    <span class="help-block">Ce champs est obligatoire</span>
-                </div>
+                <input type="text" [(ngModel)]="movie.releaseYear">
             </div>
             <div class="control-group">
                 <label class="control-label">Réalisateur : </label>
-                <input type="text" ng-control="directors">
+                <input type="text" [(ngModel)]="movie.directors">
             </div>
             <div class="control-group">
                 <label class="control-label">Acteurs :</label>
-                <input type="text" ng-control="actors">
+                <input type="text" [(ngModel)]="movie.actors">
             </div>
 
             <div class="control-group">
                 <label class="control-label">Note :</label>
-                <input type="number" placeholder="entre 1 et 5" ng-control="rate">
+                <input type="number" placeholder="entre 1 et 5" [(ngModel)]="movie.rate">
             </div>
         </form>
     </section>
     <footer>
-        <a [router-link]="['/Movies']" data-dismiss="modal" class="btn btn-danger btn-small">Annuler</a>
-        <button class="btn btn-success" [disabled]="!movieForm.valid" (click)="editMovie()">Modifier</button>
+        <a [routerLink]="['Movies']" data-dismiss="modal" class="btn btn-danger btn-small">Annuler</a>
+        <button class="btn btn-success" (click)="editMovie()">Modifier</button>
     </footer>
 
 </div>
