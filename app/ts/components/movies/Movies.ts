@@ -41,4 +41,11 @@ export class MoviesComponent {
                 this.movies.push(newMovie);
             });
     }
+
+    deleteMovie(index, movie) {
+        this.http.delete('api/movies/'+movie.id)
+            .subscribe((resp)=> {
+                this.movies.splice(index, 1);
+            });
+    }
 }
