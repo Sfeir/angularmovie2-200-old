@@ -2,6 +2,7 @@ import {Component} from 'angular2/core';
 import {NgFor} from 'angular2/common';
 import {MovieFormComponent} from '../movieForm/MovieFormComponent';
 import {Http,Headers} from 'angular2/http';
+import {RouterLink} from 'angular2/router'
 import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/observable/interval';
