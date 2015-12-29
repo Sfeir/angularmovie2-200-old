@@ -1,8 +1,6 @@
-import {Component, View} from 'angular2/angular2';
+import {Component} from 'angular2/core';
 @Component({
-    selector: 'home'
-})
-@View({
+    selector: 'home',
     templateUrl: 'ts/components/home/home.html'
 })
 export class HomeComponent {
