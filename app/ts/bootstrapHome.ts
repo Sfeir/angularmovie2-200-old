@@ -1,5 +1,4 @@
-import {bootstrap} from 'angular2/angular2';
-import {HomeComponent} from 'ts/components/home/Home';
-
+import {bootstrap} from 'angular2/platform/browser';
+import {HomeComponent} from './components/home/Home';
 
 bootstrap(HomeComponent);
