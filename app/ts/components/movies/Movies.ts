@@ -1,5 +1,6 @@
 import {Component} from 'angular2/core';
 import {NgFor} from 'angular2/common';
+import {MovieFormComponent} from '../movieForm/MovieFormComponent';
 
 @Component({
     selector: 'movies',
