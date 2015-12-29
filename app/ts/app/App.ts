@@ -1,9 +1,7 @@
-import {View, Component} from 'angular2/angular2';
+import {Component} from 'angular2/core';
 
 @Component({
-    selector: 'movies-app'
-})
-@View({
+    selector: 'movies-app',
     templateUrl:'ts/app/app.html',
     directives:[]
 })
