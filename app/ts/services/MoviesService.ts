@@ -1,5 +1,9 @@
-import { Injectable,Inject} from 'angular2/angular2';
+import { Injectable,Inject} from 'angular2/core';
 import {Http,Headers} from 'angular2/http';
+import {Observable} from 'rxjs/Observable';
+import 'rxjs/add/operator/map';
+import 'rxjs/add/observable/interval';
+
 
 @Injectable()
 export class MoviesService {

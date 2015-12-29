@@ -1,4 +1,4 @@
-import {Pipe} from 'angular2/angular2';
+import {Pipe} from 'angular2/core';
 // We use the @Pipe decorator to register the name of the pipe
 @Pipe({
     name: 'rate'

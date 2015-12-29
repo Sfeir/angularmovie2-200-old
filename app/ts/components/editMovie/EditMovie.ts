@@ -1,7 +1,9 @@
-import {Component, View, FORM_DIRECTIVES,CORE_DIRECTIVES, Inject, ControlGroup,FormBuilder,Validators,Control} from 'angular2/angular2';
+import {Component, View, Inject} from 'angular2/core';
+import {FORM_DIRECTIVES,CORE_DIRECTIVES, ControlGroup,FormBuilder,Validators,Control} from 'angular2/common';
 import {Http,Headers} from 'angular2/http';
 import {Router,RouterLink,RouteParams} from 'angular2/router';
 import {MoviesService} from '../../services/MoviesService';
+
 
 
 

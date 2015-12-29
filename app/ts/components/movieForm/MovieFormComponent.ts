@@ -1,4 +1,5 @@
-import {Component, View, FORM_DIRECTIVES,EventEmitter} from 'angular2/angular2';
+import {Component, View, EventEmitter} from 'angular2/core';
+import {FORM_DIRECTIVES} from 'angular2/common';
 
 @Component({
     selector: 'movie-form',
@@ -11,13 +12,13 @@ import {Component, View, FORM_DIRECTIVES,EventEmitter} from 'angular2/angular2';
 export class MovieFormComponent {
     movie:Object;
     name:string;
-    movieAdd: EventEmitter;
+    movieAdd: EventEmitter<any>;
     constructor() {
         this.movieAdd = new EventEmitter();
         this.movie={};
     }
     addMovie(){
-        this.movieAdd.next(this.movie);
+        this.movieAdd.emit(this.movie);
         this.movie={};
     }
 }

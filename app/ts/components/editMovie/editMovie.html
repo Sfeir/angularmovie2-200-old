@@ -3,41 +3,41 @@
         <h3>Modifier le film</h3>
     </header>
     <section class="modal-body">
-        <form class="form-horizontal" [ng-form-model]="movieForm">
-            <div class="control-group" [ng-class]="{error: !isControlValid('title')}">
+        <form class="form-horizontal" [ngFormModel]="movieForm">
+            <div class="control-group" [ngClass]="{error: !isControlValid('title')}">
                 <label class="control-label">Titre :</label>
-                <input type="text" ng-control="title">
-                <div *ng-if="!movieForm.controls.title.valid">
+                <input type="text" ngControl="title">
+                <div *ngIf="!movieForm.controls.title.valid">
                     <span class="help-block">Ce champs est obligatoire</span>
                 </div>
             </div>
-            <div class="control-group" [ng-class]="{error: !isControlValid('releaseYear')}">
+            <div class="control-group" [ngClass]="{error: !isControlValid('releaseYear')}">
                 <label class="control-label">Année de sortie :</label>
-                <input type="text" ng-control="releaseYear">
-                <div *ng-if="!movieForm.controls.releaseYear.valid">
+                <input type="text" ngControl="releaseYear">
+                <div *ngIf="!movieForm.controls.releaseYear.valid">
                     <span class="help-block">Ce champs est obligatoire</span>
                 </div>
             </div>
             <div class="control-group">
                 <label class="control-label">Réalisateur : </label>
-                <input type="text" ng-control="directors">
+                <input type="text" ngControl="directors">
             </div>
             <div class="control-group">
                 <label class="control-label">Acteurs :</label>
-                <input type="text" ng-control="actors">
+                <input type="text" ngControl="actors">
             </div>
 
             <div class="control-group">
                 <label class="control-label">Note :</label>
-                <input type="text" placeholder="entre 1 et 5" ng-control="rate">
-                <div *ng-if="!movieForm.controls.rate.valid">
-                    <div *ng-if="movieForm.controls.rate.errors.number">
+                <input type="text" placeholder="entre 1 et 5" ngControl="rate">
+                <div *ngIf="!movieForm.controls.rate.valid">
+                    <div *ngIf="movieForm.controls.rate.errors.number">
                         <span class="help-block">La valeur doit être un nombre</span>
                     </div>
-                    <div *ng-if="movieForm.controls.rate.errors.min">
+                    <div *ngIf="movieForm.controls.rate.errors.min">
                         <span class="help-block">La valeur doit être supérieure à 1</span>
                     </div>
-                    <div *ng-if="movieForm.controls.rate.errors.max">
+                    <div *ngIf="movieForm.controls.rate.errors.max">
                         <span class="help-block">La valeur doit être inférieure à 5</span>
                     </div>
                 </div>
@@ -45,7 +45,7 @@
         </form>
     </section>
     <footer>
-        <a [router-link]="['/Movies']" data-dismiss="modal" class="btn btn-danger btn-small">Annuler</a>
+        <a [routerLink]="['/Movies']" data-dismiss="modal" class="btn btn-danger btn-small">Annuler</a>
         <button class="btn btn-success" [disabled]="!movieForm.valid" (click)="editMovie()">Modifier</button>
     </footer>
 

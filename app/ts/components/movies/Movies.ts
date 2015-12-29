@@ -1,5 +1,5 @@
-import {Component, View, CORE_DIRECTIVES, Inject} from 'angular2/angular2';
-import {Http,Headers} from 'angular2/http';
+import {Component, View, Inject} from 'angular2/core';
+import {CORE_DIRECTIVES} from 'angular2/common';
 import {RouterLink} from 'angular2/router'
 import {MovieFormComponent} from '../movieForm/MovieFormComponent';
 import {MoviesService} from '../../services/MoviesService';
@@ -8,7 +8,8 @@ import {Highlight} from '../../directives/Highlight';
 import {Lazy} from '../../directives/Lazy';
 
 @Component({
-    selector: 'movies'
+    selector: 'movies',
+    providers:[MoviesService]
 })
 @View({
     templateUrl: 'ts/components/movies/movies.html',
@@ -18,13 +19,11 @@ import {Lazy} from '../../directives/Lazy';
 export class MoviesComponent {
     name:string;
     movies:any;
-    http:Http;
     moviesService: MoviesService;
     lastViewDate:Date;
     displayTable:boolean;
 
-    constructor(@Inject(Http)http,@Inject(MoviesService)moviesService) {
-        this.http = http;
+    constructor(moviesService:MoviesService) {
         this.moviesService=moviesService;
         this.movies = [];
         this.lastViewDate=new Date();
