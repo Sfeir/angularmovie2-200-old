@@ -1,11 +1,8 @@
-import {Component, View, NgFor, Inject} from 'angular2/angular2';
-import {Http,Headers} from 'angular2/http';
-import {MovieFormComponent} from '../movieForm/MovieFormComponent';
+import {Component} from 'angular2/core';
+import {NgFor} from 'angular2/common';
 
 @Component({
-    selector: 'movies'
-})
-@View({
+    selector: 'movies',
     templateUrl: 'ts/components/movies/movies.html',
     directives: [NgFor, MovieFormComponent]
 })
