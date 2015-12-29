@@ -52,11 +52,14 @@ module.exports = function (grunt) {
         ts: {
             dev : {
                 src: ["<%= yeoman.app %>/ts/**/*.ts", "!node_modules/**/*.ts"],
-                fast:'always',
                 options: {
-                    experimentalDecorators:true,
-                    module: 'commonjs',
-                    failOnTypeErrors: false
+                    "fast":'always',
+                    "module": "commonjs",
+                    "emitDecoratorMetadata": true,
+                    "experimentalDecorators": true,
+                    "removeComments": false,
+                    "noImplicitAny": false,
+                    "failOnTypeErrors": false
                 }
             }
         }
