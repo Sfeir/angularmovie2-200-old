@@ -12,7 +12,8 @@ import {EditMovieComponent} from '../components/editMovie/EditMovie'
 @RouteConfig([
     { path: '/', redirectTo: ['/Movies'] },
     { path: '/home', name: 'Home', component: HomeComponent },
-    { path: '/movies', name: 'Movies', component: MoviesComponent }
+    { path: '/movies', name: 'Movies', component: MoviesComponent },
+    { path: '/movies/edit/:id', name: 'Editmovie', component: EditMovieComponent }
 ])
 export class App {
     constructor(router:Router) {
