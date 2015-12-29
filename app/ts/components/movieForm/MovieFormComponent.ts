@@ -3,7 +3,7 @@ import {FORM_DIRECTIVES} from 'angular2/common';
 
 @Component({
     selector: 'movie-form',
-    output: ['movieAdd'],
+    outputs: ['movieAdd'],
     templateUrl: 'ts/components/movieForm/movie-form.html',
     directives:[FORM_DIRECTIVES]
 })
