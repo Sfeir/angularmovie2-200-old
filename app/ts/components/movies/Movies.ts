@@ -1,13 +1,13 @@
-import {Component, View, NgFor, Inject} from 'angular2/angular2';
-import {Http,Headers} from 'angular2/http';
-import {RouterLink} from 'angular2/router'
+import {Component} from 'angular2/core';
+import {NgFor} from 'angular2/common';
 import {MovieFormComponent} from '../movieForm/MovieFormComponent';
-import {MoviesService} from '../../services/MoviesService';
+import {Http,Headers} from 'angular2/http';
+import {Observable} from 'rxjs/Observable';
+import 'rxjs/add/operator/map';
+import 'rxjs/add/observable/interval';
 
 @Component({
-    selector: 'movies'
-})
-@View({
+    selector: 'movies',
     templateUrl: 'ts/components/movies/movies.html',
     directives: [NgFor, MovieFormComponent,RouterLink]
 })
@@ -17,27 +17,25 @@ export class MoviesComponent {
     http:Http;
     moviesService: MoviesService;
 
-    constructor(@Inject(Http)http,@Inject(MoviesService)moviesService) {
+    constructor(http:Http) {
         this.http = http;
         this.moviesService=moviesService;
         this.movies = [];
         this.getMovies();
     }
 
-    getMovies(){
-        this.moviesService.fetchMovies().subscribe((movies)=>{
-            this.movies=movies;
-        });
-    }
-    addMovie(movie){
-        this.moviesService.addMovie(movie).subscribe((newMovie)=> {
-            this.movies.push(newMovie);
-        });
-    }
-    deleteMovie(index,movie){
-        this.moviesService.deleteMovie(index,movie).subscribe(()=> {
-            this.movies.splice(index, 1);
-        });
+    getMovies() {
+        this.http.get('api/movies').map(res => res.json())
+            .subscribe((movies)=> {
+                this.movies = movies;
+            });
     }
 
+    addMovie(movie) {
+        this.http.post('api/movies', JSON.stringify(movie),{headers: new Headers({'Content-Type': 'application/json'})})
+            .map(res => res.json())
+            .subscribe((newMovie)=> {
+                this.movies.push(newMovie);
+            });
+    }
 }
