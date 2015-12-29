@@ -6,7 +6,7 @@
 </header>
 
 <ul class="thumbnails">
-    <li *ng-for="#movie of movies" class="movieResult" class="span12">
+    <li *ngFor="#movie of movies" class="movieResult" class="span12">
         <img [src]="movie.poster || 'img/no-poster.jpg'" class="span2">
         <div class="caption">
             <h3>{{movie.title}}
@@ -22,4 +22,4 @@
 
 
 <!-- formulaire de création - caché par défaut -->
-<movie-form (movie-add)="addMovie($event)"></movie-form>
+<movie-form (movieAdd)="addMovie($event)"></movie-form>
