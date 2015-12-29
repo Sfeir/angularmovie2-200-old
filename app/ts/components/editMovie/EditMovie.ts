@@ -1,23 +1,22 @@
-import {Component, View, FORM_DIRECTIVES,CORE_DIRECTIVES, Inject, ControlGroup,FormBuilder} from 'angular2/angular2';
+import {Component} from 'angular2/core';
+import {FORM_DIRECTIVES} from 'angular2/common';
+import {Router,RouterLink,RouteParams} from 'angular2/router'
 import {Http,Headers} from 'angular2/http';
-import {Router,RouterLink,RouteParams} from 'angular2/router';
-
 
 @Component({
-    selector: 'edit-movie'
-})
-@View({
+    selector: 'edit-movie',
     templateUrl: 'ts/components/editMovie/editMovie.html',
     directives: [CORE_DIRECTIVES,FORM_DIRECTIVES, RouterLink]
 })
 export class EditMovieComponent {
     id:string;
     router:Router;
+    http:Http;
     movie:any;
     http:Http;
     movieForm: ControlGroup;
 
-    constructor(@Inject(Router)router, @Inject(RouteParams)routeParams,@Inject(Http)http,@Inject(FormBuilder)builder) {
+    constructor(router:Router,routeParams:RouteParams,http:Http) {
         this.router = router;
         this.http = http;
         this.id = routeParams.get('id');
@@ -27,24 +26,16 @@ export class EditMovieComponent {
         }
     }
     getMovie(id:String) {
-        this.http.get('api/movies/' + id)
+        this.http.get('api/movies/'+ id)
             .map(res => res.json())
             .subscribe((movie)=> {
                 this.movie = movie;
             });
     }
     editMovie() {
-        this.http.put('api/movies', JSON.stringify(this.movie), {headers: new Headers({'Content-Type': 'application/json'})})
-            .subscribe((newMovie)=> {
-                var instruction = this.router.generate(['/Movies']);
-                this.router.navigateByInstruction(instruction);
+        this.http.put('api/movies', JSON.stringify(this.movie),{headers: new Headers({'Content-Type': 'application/json'})})
+            .subscribe(()=> {
+                this.router.navigate(['Movies']);
             });
-    }
-    isControlValid(cName:string,form:ControlGroup) {
-        var isValid=true;
-        if(form.controls && form.controls[cName]){
-            isValid=form.controls[cName].valid;
-        }
-        return isValid;
     }
 }
