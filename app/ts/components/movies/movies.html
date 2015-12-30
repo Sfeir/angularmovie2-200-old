@@ -1,32 +1,18 @@
 <header class="page-header">
     <h1>
-        Ma vidéothèque <small>{{movies.length}} films</small>
+        Ma vidéothèque
+        <small>{{movies.length}} films</small>
         <button class="btn btn-primary" data-toggle="modal" data-target="#movie-form-modal">Ajouter un film</button>
         <button class="btn btn-success" (click)="switchDisplay()">
-            <i *ng-if="displayTable" class="icon-list icon-white"></i>
-            <i *ng-if="!displayTable" class="icon-th icon-white"></i>
+            <i *ngIf="displayTable" class="icon-list icon-white"></i>
+            <i *ngIf="!displayTable" class="icon-th icon-white"></i>
         </button>
     </h1>
     <span>(dernière consultation:{{lastViewDate | date:'dd/MM/yyyy'}})</span>
 </header>
+<div [ngSwitch]="displayTable">
 
-<ul class="thumbnails">
-    <li *ngFor="#movie of movies;#i = index" class="movieResult span12">
-        <img [src]="movie.poster || 'img/no-poster.jpg'" class="span2">
-        <div class="caption">
-            <h3>{{movie.title}}
-                <button class="btn btn-danger" (click)="deleteMovie(i,movie)"><i class="icon-trash icon-white"></i></button>
-                <a class="btn btn-info" [routerLink]="['/Editmovie',{id:movie.id}]"><i class="icon-edit icon-white"></i></a>
-            </h3>
-            <p><b>Année de sortie : </b>{{movie.releaseYear}}</p>
-            <p><b>Réalisateur : </b>{{movie.directors}}</p>
-            <p><b>Acteurs : </b>{{movie.actors}}</p>
-            <p><b>Synopsis : </b>{{movie.synopsis}}</p>
-        </div>
-    </li>
-</ul>
-
-    <template [ng-switch-when]="true">
+    <template [ngSwitchWhen]="true">
         <table class="table table-striped">
             <thead>
             <tr>
@@ -38,9 +24,9 @@
             </tr>
             </thead>
             <tbody>
-            <tr *ng-for="#movie of movies;#i = index">
+            <tr *ngFor="#movie of movies;#i = index">
                 <td>{{i + 1}}</td>
-                <td><a [router-link]="['/Editmovie',{id:movie.id}]">{{movie.title}}</a></td>
+                <td><a [routerLink]="['/Editmovie',{id:movie.id}]">{{movie.title}}</a></td>
                 <td>{{movie.directors}}</td>
                 <td>{{movie.releaseYear}}</td>
                 <td>{{movie.rate}}</td>
@@ -49,20 +35,29 @@
         </table>
     </template>
 
-    <template [ng-switch-when]="false">
+    <template [ngSwitchWhen]="false">
         <ul class="thumbnails">
-            <li *ng-for="#movie of movies;#i = index" class="movieResult" class="span12">
+            <li *ngFor="#movie of movies;#i = index" class="movieResult" class="span12">
                 <img [src]="movie.poster || 'img/no-poster.jpg'" class="span2">
+
                 <div class="caption">
                     <h3>{{movie.title | uppercase}}
-                        <button class="btn btn-danger" (click)="deleteMovie(i,movie)"><i class="icon-trash icon-white"></i></button>
-                        <a class="btn btn-info" [router-link]="['/Editmovie',{id:movie.id}]"><i class="icon-edit icon-white"></i></a>
+                        <button class="btn btn-danger" (click)="deleteMovie(i,movie)"><i
+                                class="icon-trash icon-white"></i>
+                        </button>
+                        <a class="btn btn-info" [routerLink]="['/Editmovie',{id:movie.id}]"><i
+                                class="icon-edit icon-white"></i></a>
                     </h3>
                     <p><b>Année de sortie : </b>{{movie.releaseYear}}</p>
+
                     <p><b>Réalisateur : </b>{{movie.directors}}</p>
+
                     <p><b>Acteurs : </b>{{movie.actors}}</p>
+
                     <p><b>Synopsis : </b>{{movie.synopsis}}</p>
+
                     <p><b>Prix : </b> {{movie.price | currency:'EUR':true}}</p>
+
                     <p><b>Note : </b> {{movie.rate | rate}}</p>
                 </div>
             </li>
