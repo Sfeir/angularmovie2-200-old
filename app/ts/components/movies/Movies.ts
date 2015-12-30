@@ -1,5 +1,5 @@
 import {Component} from 'angular2/core';
-import {NgFor} from 'angular2/common';
+import {CORE_DIRECTIVES} from 'angular2/common';
 import {MovieFormComponent} from '../movieForm/MovieFormComponent';
 import {RouterLink} from 'angular2/router'
 import {MoviesService} from '../../services/MoviesService';
@@ -44,5 +44,8 @@ export class MoviesComponent {
         this.moviesService.deleteMovie(index,movie).subscribe(()=> {
             this.movies.splice(index, 1);
         });
+    }
+    switchDisplay(){
+        this.displayTable=!this.displayTable;
     }
 }
