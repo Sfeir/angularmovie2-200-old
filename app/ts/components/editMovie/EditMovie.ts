@@ -1,5 +1,5 @@
 import {Component} from 'angular2/core';
-import {CORE_DIRECTIVES, FORM_DIRECTIVES, FormBuilder, Validators, ControlGroup} from 'angular2/common';
+import {CORE_DIRECTIVES, FORM_DIRECTIVES, FormBuilder, Validators, ControlGroup, Control} from 'angular2/common';
 import {Router,RouterLink,RouteParams} from 'angular2/router'
 import {Http,Headers} from 'angular2/http';
 
@@ -59,5 +59,32 @@ export class EditMovieComponent {
             .subscribe(()=> {
                 this.router.navigate(['Movies']);
             });
+    }
+    getRangeNumberValidator(min, max) {
+        return function (c:Control):any {
+            if(c.value){
+                var val = parseInt(c.value);
+                //it's a number ?
+                if (isNaN(val)) {
+                    return {
+                        number: true
+                    }
+                }
+                //it's higher than min
+                if (val < min) {
+                    return {
+                        min: true
+                    }
+                }
+                //it's lower than max
+                if (val > max) {
+                    return {
+                        max: true
+                    }
+                }
+            }
+            // Null means valid
+            return null
+        };
     }
 }
