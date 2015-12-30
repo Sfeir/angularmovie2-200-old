@@ -3,6 +3,8 @@ import {NgFor} from 'angular2/common';
 import {MovieFormComponent} from '../movieForm/MovieFormComponent';
 import {RouterLink} from 'angular2/router'
 import {MoviesService} from '../../services/MoviesService';
+import {RatePipe} from '../../pipes/RatePipe';
+
 import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/observable/interval';
