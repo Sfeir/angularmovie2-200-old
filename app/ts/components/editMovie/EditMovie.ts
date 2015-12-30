@@ -1,24 +1,25 @@
 import {Component} from 'angular2/core';
 import {CORE_DIRECTIVES, FORM_DIRECTIVES, FormBuilder, Validators, ControlGroup, Control} from 'angular2/common';
 import {Router,RouterLink,RouteParams} from 'angular2/router'
-import {Http,Headers} from 'angular2/http';
+import {MoviesService} from '../../services/MoviesService';
 
 
 @Component({
     selector: 'edit-movie',
     templateUrl: 'ts/components/editMovie/editMovie.html',
-    directives: [CORE_DIRECTIVES,FORM_DIRECTIVES, RouterLink]
+    directives: [CORE_DIRECTIVES, FORM_DIRECTIVES, RouterLink]
 })
 export class EditMovieComponent {
     id:string;
     router:Router;
-    http:Http;
     movie:any;
-    movieForm: ControlGroup;
+    movieForm:ControlGroup;
+    moviesService:MoviesService;
 
-    constructor(router:Router,routeParams:RouteParams,http:Http, builder: FormBuilder) {
+
+    constructor(router:Router, routeParams:RouteParams, builder:FormBuilder, moviesService:MoviesService) {
         this.router = router;
-        this.http = http;
+        this.moviesService=moviesService;
         this.id = routeParams.get('id');
         this.movie = {};
         this.movieForm = builder.group(
@@ -27,7 +28,7 @@ export class EditMovieComponent {
                 releaseYear: ["", Validators.required],
                 directors: [""],
                 actors: [""],
-                rate: ["",this.getRangeNumberValidator(1,5)]
+                rate: ["", this.getRangeNumberValidator(1, 5)]
             }
         );
 
@@ -37,8 +38,7 @@ export class EditMovieComponent {
     }
 
     getMovie(id:String) {
-        this.http.get('api/movies/'+ id)
-            .map(res => res.json())
+        this.moviesService.getMovie(this.id)
             .subscribe((movie)=> {
                 this.movie = movie;
                 this.movieForm.controls['title'].updateValue(this.movie.title);
@@ -48,21 +48,23 @@ export class EditMovieComponent {
                 this.movieForm.controls['rate'].updateValue(this.movie.rate);
             });
     }
-    editMovie() {
-        this.movie.title=this.movieForm.value.title;
-        this.movie.releaseYear=this.movieForm.value.releaseYear;
-        this.movie.directors=this.movieForm.value.directors;
-        this.movie.actors=this.movieForm.value.actors;
-        this.movie.rate=this.movieForm.value.rate;
 
-        this.http.put('api/movies', JSON.stringify(this.movie),{headers: new Headers({'Content-Type': 'application/json'})})
+    editMovie() {
+        this.movie.title = this.movieForm.value.title;
+        this.movie.releaseYear = this.movieForm.value.releaseYear;
+        this.movie.directors = this.movieForm.value.directors;
+        this.movie.actors = this.movieForm.value.actors;
+        this.movie.rate = this.movieForm.value.rate;
+
+        this.moviesService.updateMovie(this.movie)
             .subscribe(()=> {
                 this.router.navigate(['Movies']);
             });
     }
+
     getRangeNumberValidator(min, max) {
         return function (c:Control):any {
-            if(c.value){
+            if (c.value) {
                 var val = parseInt(c.value);
                 //it's a number ?
                 if (isNaN(val)) {
