@@ -1,10 +1,10 @@
-import { Injectable,Inject} from 'angular2/angular2';
+import { Injectable} from 'angular2/core';
 import {Http,Headers} from 'angular2/http';
 
 @Injectable()
 export class MoviesService {
     http:Http;
-    constructor(@Inject(Http)http) {
+    constructor(http:Http) {
         this.http = http;
     }
     fetchMovies() {
