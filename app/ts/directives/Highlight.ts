@@ -1,10 +1,8 @@
-import {Directive, ElementRef,EventEmitter,Inject} from 'angular2/angular2';
+import {Directive, ElementRef,EventEmitter,Inject} from 'angular2/core';
 
 @Directive({
     selector: '[highlight]',
-    properties: [
-        'message: message'
-    ],
+    inputs: ['message'],
     host: {
         '(mouseenter)': 'onmouseEnter()',
         '(mouseleave)': 'onmouseLeave()',
@@ -16,7 +14,7 @@ export class Highlight {
     message:string;
     element:ElementRef;
 
-    constructor(@Inject(ElementRef)element) {
+    constructor(element:ElementRef) {
         this.element=element;
     }
 
