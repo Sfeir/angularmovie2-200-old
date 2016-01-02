@@ -1,24 +1,24 @@
 <!-- header-->
 <header class="page-header">
-    <h1>Ma vidéothèque <small>{{movies.length}} films</small>
+    <h1>Ma vidéothèque <small>{{vm.movies.length}} films</small>
     </h1>
 </header>
 
 <!-- barre d'actions -->
 <section class="well form-inline">
-    <input class="span5" type="text" ng-model="search" placeholder="Rechercher">
+    <input class="span5" type="text" ng-model="vm.search" placeholder="Rechercher">
     <section class="pull-right">
-        <button class="btn btn-success" ng-click="toogleView()"><i ng-class="tableViewIcon"></i></button>
-        <button class="btn btn-info" ng-click="tri = 'releaseYear'; reverse = !reverse">Trier par année</button>
-        <button class="btn btn-info" ng-click="tri = 'title'; reverse = !reverse">Trier par titre</button>
+        <button class="btn btn-success" ng-click="vm.toogleView()"><i ng-class="vm.tableViewIcon"></i></button>
+        <button class="btn btn-info" ng-click="vm.tri = 'releaseYear'; vm.reverse = !vm.reverse">Trier par année</button>
+        <button class="btn btn-info" ng-click="vm.tri = 'title'; vm.reverse = !vm.reverse">Trier par titre</button>
     </section>
 </section>
 
 
 <!-- liste des films -->
-<div ng-switch on="tableView" >
+<div ng-switch on="vm.tableView" >
     <ul class="thumbnails" ng-switch-when="false">
-        <li ng-repeat="movie in movies | orderBy:tri:reverse | filter : search " class="span12">
+        <li ng-repeat="movie in vm.movies | orderBy:vm.tri:vm.reverse | filter : vm.search " class="span12">
             <img ng-src="{{movie.poster | poster}}" class="span2">
             <div class="caption">
                 <h3>{{movie.title | uppercase}}
@@ -44,7 +44,7 @@
         </tr>
         </thead>
         <tbody>
-        <tr ng-repeat="movie in movies | orderBy:tri:reverse | filter : search ">
+        <tr ng-repeat="movie in vm.movies | orderBy:vm.tri:vm.reverse | filter : vm.search ">
             <td>{{$index + 1}}</td>
             <td>{{movie.title | uppercase}}</td>
             <td>{{movie.directors}}</td>

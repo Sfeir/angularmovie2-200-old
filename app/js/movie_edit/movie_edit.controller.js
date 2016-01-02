@@ -1,12 +1,13 @@
 angular.module('movie.edit').controller('editMovieController', function($scope, Movie, $routeParams, $location){
+    var vm = this;
 
     var movieId = $routeParams.id;
 
     Movie.fetchOne(movieId).success(function(movie){
-        $scope.movie = movie;
+        vm.movie = movie;
     });
 
-    $scope.updateMovie = function(movie){
+    vm.updateMovie = function(movie){
         Movie.update(movie)
             .success(function(){
                 $location.path('/movies');

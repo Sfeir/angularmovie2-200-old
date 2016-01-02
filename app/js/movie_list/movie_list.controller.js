@@ -1,30 +1,30 @@
 angular.module('movie.list').controller("moviesController" ,function ($scope, Movie) {
-
+    var vm = this;
     // display mode by default
-    $scope.tableView = false;
+    vm.tableView = false;
     // icon by mode by default
-    $scope.tableViewIcon = 'icon-th-list icon-white';
+    vm.tableViewIcon = 'icon-th-list icon-white';
 
     // function called when changing view mode
-    $scope.toogleView = function() {
-        $scope.tableView = !$scope.tableView;
+    vm.toogleView = function() {
+        vm.tableView = !vm.tableView;
 
-        if($scope.tableView === false){
-            $scope.tableViewIcon = 'icon-th-list icon-white';
+        if(vm.tableView === false){
+            vm.tableViewIcon = 'icon-th-list icon-white';
         } else {
-            $scope.tableViewIcon = 'icon-th icon-white';
+            vm.tableViewIcon = 'icon-th icon-white';
         }
     };
 
     Movie.fetch().success(function(resp){
-        $scope.movies = resp;
+        vm.movies = resp;
     });
 
 
-    $scope.deleteMovie = function(index){
-        Movie.remove($scope.movies[index].id)
+    vm.deleteMovie = function(index){
+        Movie.remove(vm.movies[index].id)
             .success(function(resp){
-                    $scope.movies.splice(index, 1);
+                    vm.movies.splice(index, 1);
                 }
             );
     };
