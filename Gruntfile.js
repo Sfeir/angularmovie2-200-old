@@ -51,7 +51,7 @@ module.exports = function (grunt) {
 
         ts: {
             dev : {
-                src: ["<%= yeoman.app %>/ts/**/*.ts", "!node_modules/**/*.ts"],
+                src: ["<%= yeoman.app %>/js/**/*.ts", "!node_modules/**/*.ts"],
                 options: {
                     "fast":'always',
                     "module": "commonjs",

@@ -1,1 +1,0 @@
-angular.module('movie.edit', ['movie.core']);

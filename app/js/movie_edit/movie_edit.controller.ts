@@ -1,4 +1,6 @@
-angular.module('movie.edit').controller('editMovieController', function($scope, Movie, $routeParams, $location){
+EditMovieController.$inject = ['$scope', 'Movie', '$routeParams', '$location'];
+
+function EditMovieController ($scope, Movie, $routeParams, $location){
     var vm = this;
 
     var movieId = $routeParams.id;
@@ -16,4 +18,6 @@ angular.module('movie.edit').controller('editMovieController', function($scope, 
                 console.log(resp);
             });
     };
-});
+};
+
+export default EditMovieController;

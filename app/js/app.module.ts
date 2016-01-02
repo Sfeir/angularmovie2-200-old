@@ -1,0 +1,33 @@
+/// <reference path="../../typings/angularjs/angular.d.ts" />
+/// <reference path="../../typings/angularjs/angular-route.d.ts" />
+import core from './movie_core/movie_core.module';
+import movieList from './movie_list/movie_list.module';
+import movieEdit from './movie_edit/movie_edit.module';
+
+angular.module('movieApp', [
+    core.name,
+    movieList.name,
+    movieEdit.name,
+    'ngRoute'
+]).config(configure);
+
+configure.$inject = ['$routeProvider'];
+function configure($routeProvider) {
+    $routeProvider
+        .when('/movies', {
+            templateUrl: 'js/movie_list/movie_list.html',
+            controller : 'moviesController',
+            controllerAs: 'vm'
+
+        })
+        .when('/movies/edit/:id', {
+            templateUrl: 'js/movie_edit/movie_edit.html',
+            controller: 'editMovieController',
+            controllerAs: 'vm'
+        })
+        .otherwise({
+            redirectTo: '/movies'
+        });
+}
+
+angular.bootstrap(document.documentElement, ['movieApp']);

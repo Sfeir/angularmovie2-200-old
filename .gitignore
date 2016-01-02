@@ -6,3 +6,6 @@ node_modules/
 app/lib/
 app/ts/**/*.map
 app/ts/**/*.js
+app/js/**/*.map
+app/js/**/*.js
+typings/

@@ -1,1 +1,0 @@
-angular.module('movie.list', ['movie.core']);

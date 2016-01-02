@@ -1,5 +1,4 @@
-angular.module('movie.core').filter('stars', function () {
-
+export default function starsFilter() {
     var STARS = {
         1: '\u2605',
         2: '\u2605\u2605',
@@ -8,7 +7,8 @@ angular.module('movie.core').filter('stars', function () {
         5: '\u2605\u2605\u2605\u2605\u2605'
     };
 
-    return function(startCount) {
+    return function (startCount) {
         return STARS[startCount];
     };
-});
+}
+

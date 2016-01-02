@@ -1,6 +1,6 @@
-"use strict";
 
-angular.module('movie.core').directive('editable', function(){
+
+function Editable(){
 
     return {
         restrict : 'E',
@@ -37,4 +37,6 @@ angular.module('movie.core').directive('editable', function(){
         }
     }
 
-});
+}
+
+export default Editable;

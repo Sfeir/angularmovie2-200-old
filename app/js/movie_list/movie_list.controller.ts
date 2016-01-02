@@ -1,4 +1,6 @@
-angular.module('movie.list').controller("moviesController" ,function ($scope, Movie) {
+MovieListController.$inject = ['$scope', 'Movie'];
+
+function MovieListController ($scope, Movie) {
     var vm = this;
     // display mode by default
     vm.tableView = false;
@@ -29,4 +31,6 @@ angular.module('movie.list').controller("moviesController" ,function ($scope, Mo
             );
     };
 
-});
+};
+
+export default MovieListController;

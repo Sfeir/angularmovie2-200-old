@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html ng-app="movieApp">
+<html>
 <head>
     <title>AngularMovie</title>
     <link rel="stylesheet" href="css/bootstrap.min.css">
@@ -20,6 +20,13 @@
 
 <!-- partie principale -->
 <section class="container" ng-view></section>
+<script src="systemjs/dist/system.src.js"></script>
+<script type="text/javascript" src="lib/jquery/jquery.js"></script>
+<script type="text/javascript" src="lib/angular/angular.js"></script>
+<script type="text/javascript" src="lib/angular-route/angular-route.min.js"></script>
+<script type="text/javascript" src="lib/bootstrap/bootstrap.js"></script>
+
+<!--
 
 <script type="text/javascript" src="lib/jquery/jquery.js"></script>
 <script type="text/javascript" src="lib/angular/angular.js"></script>
@@ -37,6 +44,13 @@
 <script type="text/javascript" src="js/movie_edit/movie_edit.controller.js"></script>
 <script type="text/javascript" src="js/movie_list/movie_list.module.js"></script>
 <script type="text/javascript" src="js/movie_list/movie_list.controller.js"></script>
+-->
 
+<script>
+    System.config({
+        packages: {'js': {defaultExtension: 'js'}}
+    });
+    System.import('js/app.module');
+</script>
 </body>
 </html>
