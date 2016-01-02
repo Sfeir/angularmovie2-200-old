@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html ng-app="angularMovieApp">
+<html ng-app="movieApp">
 <head>
     <title>AngularMovie</title>
     <link rel="stylesheet" href="css/bootstrap.min.css">
@@ -11,7 +11,6 @@
 <header class="navbar navbar-fixed-top">
     <div class="navbar-inner">
         <section class="container">
-            <a class="brand" href="#/welcome">AngularMovie</a>
             <ul class="nav">
                 <li><a href="#/movies">Mes films</a></li>
             </ul>
@@ -26,11 +25,16 @@
 <script type="text/javascript" src="js/lib/angular/angular.min.js"></script>
 <script type="text/javascript" src="js/lib/bootstrap/bootstrap.js"></script>
 <script type="text/javascript" src="js/lib/angularstrap/angularstrap.js"></script>
-<script type="text/javascript" src="js/app.js"></script>
-<script type="text/javascript" src="js/services.js"></script>
-<script type="text/javascript" src="js/controllers.js"></script>
-<script type="text/javascript" src="js/filters.js"></script>
-<script type="text/javascript" src="js/directives.js"></script>
+<script type="text/javascript" src="js/app.module.js"></script>
+<script type="text/javascript" src="js/movie_core/movie_core.module.js"></script>
+<script type="text/javascript" src="js/movie_core/editable.directive.js"></script>
+<script type="text/javascript" src="js/movie_core/movie_service.js"></script>
+<script type="text/javascript" src="js/movie_core/poster.filter.js"></script>
+<script type="text/javascript" src="js/movie_core/stars.filter.js"></script>
+<script type="text/javascript" src="js/movie_edit/movie_edit.module.js"></script>
+<script type="text/javascript" src="js/movie_edit/movie_edit.controller.js"></script>
+<script type="text/javascript" src="js/movie_list/movie_list.module.js"></script>
+<script type="text/javascript" src="js/movie_list/movie_list.controller.js"></script>
 
 </body>
 </html>
