@@ -28,7 +28,3 @@ input::-webkit-inner-spin-button {
 .control-group .help-block {
     margin-left: 180px;
 }
-
-.caption > p > div {
-    display : inline-block;
-}
