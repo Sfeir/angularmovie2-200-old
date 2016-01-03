@@ -1,23 +1,29 @@
-EditMovieController.$inject = ['$scope', 'Movie', '$routeParams', '$location'];
+interface MovieRouteParams {
+    id: string
+}
 
-function EditMovieController ($scope, Movie, $routeParams, $location){
-    var vm = this;
+class EditMovieController {
+    movie:Object;
 
-    var movieId = $routeParams.id;
+    constructor(public Movie, $routeParams:MovieRouteParams, public $location){
+        var movieId = $routeParams.id;
+        this.Movie.fetchOne(movieId).success((movie)=>{
+            this.movie = movie;
+        });
+    }
 
-    Movie.fetchOne(movieId).success(function(movie){
-        vm.movie = movie;
-    });
 
-    vm.updateMovie = function(movie){
-        Movie.update(movie)
-            .success(function(){
-                $location.path('/movies');
+    updateMovie(movie){
+        this.Movie.update(movie)
+            .success(()=>{
+                this.$location.path('/movies');
             })
-            .error(function(resp){
+            .error((resp)=>{
                 console.log(resp);
             });
-    };
-};
+    }
+}
+
+EditMovieController.$inject = ['Movie', '$routeParams', '$location'];
 
 export default EditMovieController;

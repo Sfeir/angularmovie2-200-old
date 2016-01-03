@@ -1,36 +1,41 @@
-MovieListController.$inject = ['$scope', 'Movie'];
+class MovieListController {
+    tableView : boolean;
+    tableViewIcon: string;
+    movies:any[];
 
-function MovieListController ($scope, Movie) {
-    var vm = this;
-    // display mode by default
-    vm.tableView = false;
-    // icon by mode by default
-    vm.tableViewIcon = 'icon-th-list icon-white';
+    constructor(public Movie){
+        // display mode by default
+        this.tableView = false;
+        // icon by mode by default
+        this.tableViewIcon = 'icon-th-list icon-white';
+        Movie.fetch().success((resp)=>{
+            this.movies = resp;
+        });
 
-    // function called when changing view mode
-    vm.toogleView = function() {
-        vm.tableView = !vm.tableView;
+    }
 
-        if(vm.tableView === false){
-            vm.tableViewIcon = 'icon-th-list icon-white';
+    toogleView() {
+        this.tableView = !this.tableView;
+
+        if(this.tableView === false){
+            this.tableViewIcon = 'icon-th-list icon-white';
         } else {
-            vm.tableViewIcon = 'icon-th icon-white';
+            this.tableViewIcon = 'icon-th icon-white';
         }
-    };
-
-    Movie.fetch().success(function(resp){
-        vm.movies = resp;
-    });
+    }
 
 
-    vm.deleteMovie = function(index){
-        Movie.remove(vm.movies[index].id)
-            .success(function(resp){
-                    vm.movies.splice(index, 1);
+
+    deleteMovie(index){
+        this.Movie.remove(this.movies[index].id)
+            .success(()=>{
+                this.movies.splice(index, 1);
                 }
             );
-    };
+    }
 
-};
+}
+
+MovieListController.$inject = ['Movie'];
 
 export default MovieListController;

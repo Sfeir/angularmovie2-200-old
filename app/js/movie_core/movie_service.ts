@@ -1,29 +1,37 @@
 
-Movie.$inject = ['$http'];
 
-function Movie($http) {
-    var API_URI = '/api/movies';
 
-    this.fetch = function() {
-        return $http.get(API_URI);
-    };
+class Movie{
 
-    this.create = function(movie) {
-        return $http.post(API_URI, movie);
-    };
+    API_URI = '/api/movies';
 
-    this.remove = function(id) {
-        return $http.delete(API_URI + '/' + id);
-    };
+    constructor(public $http){
 
-    this.fetchOne = function(id) {
-        return $http.get(API_URI + '/' + id);
-    };
+    }
 
-    this.update = function(movie) {
-        return $http.put('/api/movies', movie);
-    };
+    fetch() {
+        return this.$http.get(this.API_URI);
+    }
+
+    create(movie) {
+        return this.$http.post(this.API_URI, movie);
+    }
+
+    remove(id) {
+        return this.$http.delete(this.API_URI + '/' + id);
+    }
+
+    fetchOne(id) {
+        return this.$http.get(this.API_URI + '/' + id);
+    }
+
+    update(movie) {
+        return this.$http.put(this.API_URI, movie);
+    }
 
 }
+
+
+Movie.$inject = ['$http'];
 
 export default Movie;
