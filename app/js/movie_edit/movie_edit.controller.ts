@@ -1,3 +1,5 @@
+import {Movies} from '../movie_core/Movies';
+
 interface MovieRouteParams {
     id: string
 }
@@ -5,21 +7,18 @@ interface MovieRouteParams {
 class EditMovieController {
     movie:Object;
 
-    constructor(public Movie, $routeParams:MovieRouteParams, public $location){
+    constructor(private movieService:Movies, $routeParams:MovieRouteParams, public $location){
         var movieId = $routeParams.id;
-        this.Movie.fetchOne(movieId).success((movie)=>{
+        this.movieService.fetchOne(movieId).subscribe((movie)=>{
             this.movie = movie;
         });
     }
 
 
     updateMovie(movie){
-        this.Movie.update(movie)
-            .success(()=>{
+        this.movieService.update(movie)
+            .subscribe(()=>{
                 this.$location.path('/movies');
-            })
-            .error((resp)=>{
-                console.log(resp);
             });
     }
 }

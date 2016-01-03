@@ -1,14 +1,16 @@
+import {Movies} from '../movie_core/Movies';
+
 class MovieListController {
     tableView : boolean;
     tableViewIcon: string;
     movies:any[];
 
-    constructor(public Movie){
+    constructor(private moviesService:Movies){
         // display mode by default
         this.tableView = false;
         // icon by mode by default
         this.tableViewIcon = 'icon-th-list icon-white';
-        Movie.fetch().success((resp)=>{
+        moviesService.fetch().subscribe((resp)=>{
             this.movies = resp;
         });
 
@@ -27,8 +29,8 @@ class MovieListController {
 
 
     deleteMovie(index){
-        this.Movie.remove(this.movies[index].id)
-            .success(()=>{
+        this.moviesService.remove(this.movies[index].id)
+            .subscribe(()=>{
                 this.movies.splice(index, 1);
                 }
             );

@@ -3,6 +3,8 @@
 import core from './movie_core/movie_core.module';
 import movieList from './movie_list/movie_list.module';
 import movieEdit from './movie_edit/movie_edit.module';
+import upgradeAdapter from './movie_core/upgrade_adapter';
+import {HTTP_PROVIDERS} from 'angular2/http';
 
 angular.module('movieApp', [
     core.name,
@@ -12,6 +14,7 @@ angular.module('movieApp', [
 ]).config(configure);
 
 configure.$inject = ['$routeProvider'];
+
 function configure($routeProvider) {
     $routeProvider
         .when('/movies', {
@@ -30,4 +33,6 @@ function configure($routeProvider) {
         });
 }
 
-angular.bootstrap(document.documentElement, ['movieApp']);
+//angular.bootstrap(document.documentElement, ['movieApp']);
+upgradeAdapter.addProvider(HTTP_PROVIDERS);
+upgradeAdapter.bootstrap(document.documentElement, ['movieApp']);
