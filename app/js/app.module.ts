@@ -18,10 +18,7 @@ configure.$inject = ['$routeProvider'];
 function configure($routeProvider) {
     $routeProvider
         .when('/movies', {
-            templateUrl: 'js/movie_list/movie_list.html',
-            controller : 'moviesController',
-            controllerAs: 'vm'
-
+            template: '<ma-movie-list></ma-movie-list>'
         })
         .when('/movies/edit/:id', {
             templateUrl: 'js/movie_edit/movie_edit.html',

@@ -1,4 +1,6 @@
-import MovieListController from './movie_list.controller'
+import MovieList from './MovieList';
+import upgradeAdapter from '../movie_core/upgrade_adapter';
 
 export default angular.module('movie.list', ['movie.core'])
-    .controller('moviesController',MovieListController);
+    .directive('maMovieList',
+        <angular.IDirectiveFactory>upgradeAdapter.downgradeNg2Component(MovieList));

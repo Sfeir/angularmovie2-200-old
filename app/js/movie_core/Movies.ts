@@ -24,7 +24,7 @@ export class Movies {
     update(movie){
         return this.http.put('api/movies',JSON.stringify(movie),{headers: new Headers({'Content-Type': 'application/json'})});
     }
-    remove(movie){
-        return this.http.delete('api/movies/'+movie.id);
+    remove(movieId){
+        return this.http.delete('api/movies/'+movieId);
     }
 }

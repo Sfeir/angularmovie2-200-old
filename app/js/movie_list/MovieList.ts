@@ -1,6 +1,17 @@
+import {Component} from 'angular2/core';
+import {CORE_DIRECTIVES} from 'angular2/common';
 import {Movies} from '../movie_core/Movies';
+import MovieFilterPipe from './MovieFilterPipe';
+import OrderByPipe from './OrderByPipe';
+import PosterPipe from '../movie_core/PosterPipe';
 
-class MovieListController {
+@Component({
+    selector: 'ma-movie-list',
+    templateUrl: 'js/movie_list/movie_list.html',
+    directives:[CORE_DIRECTIVES],
+    pipes:[MovieFilterPipe,OrderByPipe,PosterPipe]
+})
+export default class MovieList {
     tableView : boolean;
     tableViewIcon: string;
     movies:any[];
@@ -37,7 +48,3 @@ class MovieListController {
     }
 
 }
-
-MovieListController.$inject = ['Movie'];
-
-export default MovieListController;
