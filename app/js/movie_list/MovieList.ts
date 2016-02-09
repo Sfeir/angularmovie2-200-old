@@ -1,6 +1,6 @@
 import {Component} from 'angular2/core';
 import {CORE_DIRECTIVES} from 'angular2/common';
-import {Movies} from '../movie_core/Movies';
+import Movies from '../movie_core/Movies';
 import MovieFilterPipe from './MovieFilterPipe';
 import OrderByPipe from './OrderByPipe';
 import PosterPipe from '../movie_core/PosterPipe';

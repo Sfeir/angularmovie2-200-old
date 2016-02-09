@@ -1,4 +1,4 @@
-import {Movies} from './Movies'
+import Movies from './Movies'
 import Editable from './editable.directive'
 import upgradeAdapter from './upgrade_adapter';
 

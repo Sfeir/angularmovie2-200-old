@@ -1,6 +1,7 @@
 import {Component, Inject} from 'angular2/core';
 import {CORE_DIRECTIVES, FORM_DIRECTIVES} from 'angular2/common';
-import {Movies} from '../movie_core/Movies';
+import {RouteParams} from 'angular2/router';
+import Movies from '../movie_core/Movies';
 
 interface MovieRouteParams {
     id: string
@@ -15,10 +16,10 @@ export default class EditMovie {
     movie:Object;
     $location;
 
-    constructor(private movieService:Movies, @Inject('$routeParams') $routeParams:MovieRouteParams, @Inject('$location') $location) {
+    constructor(private movieService:Movies, params:RouteParams, @Inject('$location') $location) {
         this.movie={};
         this.$location=$location;
-        var movieId = $routeParams.id;
+        var movieId = params.get('id');
         this.movieService.fetchOne(movieId).subscribe((movie)=> {
             this.movie = movie;
         });

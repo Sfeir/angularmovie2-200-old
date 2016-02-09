@@ -4,7 +4,7 @@ import {Observable} from 'rxjs';
 import 'rxjs/add/operator/map';
 
 @Injectable()
-export class Movies {
+export default class Movies {
     http:Http;
     constructor(http:Http) {
         this.http = http;

@@ -1,4 +1,4 @@
-import {Movies} from '../movie_core/Movies';
+import Movies from '../movie_core/Movies';
 
 interface MovieRouteParams {
     id: string

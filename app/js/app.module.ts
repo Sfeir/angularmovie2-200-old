@@ -1,35 +1,39 @@
 /// <reference path="../../typings/angularjs/angular.d.ts" />
 /// <reference path="../../typings/angularjs/angular-route.d.ts" />
-import core from './movie_core/movie_core.module';
-import movieList from './movie_list/movie_list.module';
-import movieEdit from './movie_edit/movie_edit.module';
-import upgradeAdapter from './movie_core/upgrade_adapter';
+import {Component, provide} from 'angular2/core';
+import {bootstrap} from 'angular2/platform/browser';
+
+import MovieList from './movie_list/MovieList';
+import EditMovie from './movie_edit/EditMovie';
+import Movies from './movie_core/Movies';
 import {HTTP_PROVIDERS} from 'angular2/http';
+import {
+    RouteConfig,
+    LocationStrategy,
+    HashLocationStrategy,
+    ROUTER_DIRECTIVES,
+    ROUTER_PROVIDERS
+} from 'angular2/router';
 
-angular.module('movieApp', [
-    core.name,
-    movieList.name,
-    movieEdit.name,
-    'ngRoute'
-]).config(configure);
 
-configure.$inject = ['$routeProvider'];
 
-function configure($routeProvider) {
-    $routeProvider
-        .when('/movies', {
-            template: '<ma-movie-list></ma-movie-list>'
-        })
-        .when('/movies/edit/:id', {
-            template: '<ma-edit-movie></ma-edit-movie>'
-        })
-        .otherwise({
-            redirectTo: '/movies'
-        });
+@RouteConfig([
+    {path:'/movies', as: 'Movies', component: MovieList},
+    {path:'/movies/edit/:id', as: 'Movie', component: EditMovie},
+    {path:'/', redirectTo: ['Movies']}
+])
+@Component({
+    selector: 'ma-app',
+    template: '<router-outlet></router-outlet>',
+    directives: [ROUTER_DIRECTIVES]
+})
+class AppComponent {
 }
 
-
-upgradeAdapter.addProvider(HTTP_PROVIDERS);
-upgradeAdapter.upgradeNg1Provider('$routeParams');
-upgradeAdapter.upgradeNg1Provider('$location');
-upgradeAdapter.bootstrap(document.documentElement, ['movieApp']);
+bootstrap(AppComponent, [
+    HTTP_PROVIDERS,
+    ROUTER_PROVIDERS,
+    ROUTER_DIRECTIVES,
+    provide(LocationStrategy, {useClass: HashLocationStrategy}),
+    Movies
+]);
