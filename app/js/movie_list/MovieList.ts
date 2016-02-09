@@ -1,5 +1,6 @@
 import {Component} from 'angular2/core';
 import {CORE_DIRECTIVES} from 'angular2/common';
+import {RouterLink} from 'angular2/router';
 import Movies from '../movie_core/Movies';
 import MovieFilterPipe from './MovieFilterPipe';
 import OrderByPipe from './OrderByPipe';
@@ -9,7 +10,7 @@ import StarsPipe from '../movie_core/StarsPipe';
 @Component({
     selector: 'ma-movie-list',
     templateUrl: 'js/movie_list/movie_list.html',
-    directives:[CORE_DIRECTIVES],
+    directives:[CORE_DIRECTIVES,RouterLink],
     pipes:[MovieFilterPipe,OrderByPipe,PosterPipe, StarsPipe]
 })
 export default class MovieList {

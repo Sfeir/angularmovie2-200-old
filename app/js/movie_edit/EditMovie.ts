@@ -1,6 +1,6 @@
 import {Component, Inject} from 'angular2/core';
 import {CORE_DIRECTIVES, FORM_DIRECTIVES} from 'angular2/common';
-import {RouteParams} from 'angular2/router';
+import {Router, RouteParams} from 'angular2/router';
 import Movies from '../movie_core/Movies';
 
 interface MovieRouteParams {
@@ -16,9 +16,8 @@ export default class EditMovie {
     movie:Object;
     $location;
 
-    constructor(private movieService:Movies, params:RouteParams, @Inject('$location') $location) {
+    constructor(private movieService:Movies, params:RouteParams, private router:Router) {
         this.movie={};
-        this.$location=$location;
         var movieId = params.get('id');
         this.movieService.fetchOne(movieId).subscribe((movie)=> {
             this.movie = movie;
@@ -29,7 +28,7 @@ export default class EditMovie {
     updateMovie() {
         this.movieService.update(this.movie)
             .subscribe(()=> {
-                this.$location.path('/movies');
+                this.router.navigate(['Movies']);
             });
     }
 

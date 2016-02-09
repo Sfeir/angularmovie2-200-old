@@ -19,7 +19,7 @@ import {
 
 @RouteConfig([
     {path:'/movies', as: 'Movies', component: MovieList},
-    {path:'/movies/edit/:id', as: 'Movie', component: EditMovie},
+    {path:'/movies/edit/:id', as: 'EditMovie', component: EditMovie},
     {path:'/', redirectTo: ['Movies']}
 ])
 @Component({
