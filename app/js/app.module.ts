@@ -21,15 +21,15 @@ function configure($routeProvider) {
             template: '<ma-movie-list></ma-movie-list>'
         })
         .when('/movies/edit/:id', {
-            templateUrl: 'js/movie_edit/movie_edit.html',
-            controller: 'editMovieController',
-            controllerAs: 'vm'
+            template: '<ma-edit-movie></ma-edit-movie>'
         })
         .otherwise({
             redirectTo: '/movies'
         });
 }
 
-//angular.bootstrap(document.documentElement, ['movieApp']);
+
 upgradeAdapter.addProvider(HTTP_PROVIDERS);
+upgradeAdapter.upgradeNg1Provider('$routeParams');
+upgradeAdapter.upgradeNg1Provider('$location');
 upgradeAdapter.bootstrap(document.documentElement, ['movieApp']);

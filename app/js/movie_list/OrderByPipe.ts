@@ -1,7 +1,7 @@
 import {Pipe} from 'angular2/core';
 @Pipe({name: 'orderBy'})
 export default class OrderByPipe {
-    transform<T>(input:T[], args:string[]): T[] {
+    transform(input:Object[], args:string[]): Object[] {
         if (input) {
             let property = args[0];
             return input.slice().sort((a, b) => {

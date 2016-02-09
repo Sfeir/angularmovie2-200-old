@@ -1,4 +1,6 @@
-import EditMovieController from './movie_edit.controller'
+import EditMovie from './EditMovie'
+import upgradeAdapter from '../movie_core/upgrade_adapter';
 
 export default angular.module('movie.edit', ['movie.core'])
-.controller('editMovieController',EditMovieController);
+    .directive('maEditMovie',
+        <angular.IDirectiveFactory>upgradeAdapter.downgradeNg2Component(EditMovie));

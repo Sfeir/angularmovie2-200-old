@@ -1,6 +1,8 @@
 <!-- header-->
 <header class="page-header">
-
+    <h1>
+        Ma vidéothèque <small>{{movies.length}} films</small>
+    </h1>
 </header>
 
 <!-- barre d'actions -->
@@ -20,7 +22,7 @@
 
     <template [ngSwitchWhen]="false">
         <ul class="thumbnails">
-            <li *ngFor="#movie of movies | orderBy:tri:reverse | movieFilter:search ;#i=index" class="span12">
+            <li *ngFor="#movie of movies | orderBy:tri:reverse | movieFilter:search  ;#i=index" class="span12">
                 <img [src]="movie.poster | poster" class="span2">
 
                 <div class="caption">
@@ -38,7 +40,7 @@
 
                     <p><b>Synopsis : </b>{{movie.synopsis}}</p>
 
-                    <p><b>Note : </b>{{movie.rate }}</p>
+                    <p><b>Note : </b>{{movie.rate | stars }}</p>
                 </div>
             </li>
         </ul>
@@ -55,8 +57,8 @@
             </tr>
             </thead>
             <tbody>
-            <tr *ngFor="#movie of movies | orderBy:tri:reverse | movieFilter: search ;#i=index" grunt aria-setsize="">
-                <td>{{$index + 1}}</td>
+            <tr *ngFor="#movie of movies  | orderBy:tri:reverse | movieFilter: search ;#i=index" grunt aria-setsize="">
+                <td>{{i + 1}}</td>
                 <td>{{movie.title | uppercase}}</td>
                 <td>{{movie.directors}}</td>
                 <td>{{movie.releaseYear}}</td>
