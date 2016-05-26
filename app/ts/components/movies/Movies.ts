@@ -1,7 +1,6 @@
-import {Component} from 'angular2/core';
-import {CORE_DIRECTIVES} from 'angular2/common';
+import {Component} from '@angular/core';
+import {ROUTER_DIRECTIVES} from '@angular/router-deprecated';
 import {MovieFormComponent} from '../movieForm/MovieFormComponent';
-import {RouterLink} from 'angular2/router'
 import {MoviesService} from '../../services/MoviesService';
 import {RatePipe} from '../../pipes/RatePipe';
 import {Highlight} from '../../directives/Highlight';
@@ -14,7 +13,12 @@ import 'rxjs/add/observable/interval';
 @Component({
     selector: 'movies',
     templateUrl: 'ts/components/movies/movies.html',
-    directives: [CORE_DIRECTIVES,MovieFormComponent,RouterLink,Highlight,Lazy],
+    directives: [
+      MovieFormComponent,
+      ROUTER_DIRECTIVES,
+      Highlight,
+      Lazy
+    ],
     pipes:[RatePipe]
 })
 export class MoviesComponent {

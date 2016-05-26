@@ -24,9 +24,9 @@
             </tr>
             </thead>
             <tbody>
-            <tr *ngFor="#movie of movies;#i = index">
+            <tr *ngFor="let movie of movies; let i = index">
                 <td>{{i + 1}}</td>
-                <td><a [routerLink]="['/Editmovie',{id:movie.id}]">{{movie.title}}</a></td>
+                <td><a [routerLink]="['EditMovie', {id:movie.id}]">{{movie.title}}</a></td>
                 <td>{{movie.directors}}</td>
                 <td>{{movie.releaseYear}}</td>
                 <td>{{movie.rate}}</td>
@@ -37,7 +37,7 @@
 
     <template [ngSwitchWhen]="false">
         <ul class="thumbnails">
-            <li *ngFor="#movie of movies;#i = index" class="movieResult" class="span12">
+            <li *ngFor="let movie of movies; let i = index" class="movieResult" class="span12">
                 <img [src]="movie.poster || 'img/no-poster.jpg'" class="span2">
 
                 <div class="caption">
@@ -46,7 +46,7 @@
                         <button class="btn btn-danger" (click)="deleteMovie(i,movie)"><i
                                 class="icon-trash icon-white"></i>
                         </button>
-                        <a class="btn btn-info" [routerLink]="['/Editmovie',{id:movie.id}]"><i
+                        <a class="btn btn-info" [routerLink]="['EditMovie', {id:movie.id}]"><i
                                 class="icon-edit icon-white"></i></a>
                     </h3>
                     <p><b>Année de sortie : </b>{{movie.releaseYear}}</p>
@@ -60,7 +60,8 @@
                     <p><b>Prix : </b> {{movie.price | currency:'EUR':true}}</p>
 
                     <p><b>Note : </b> {{movie.rate | rate}}</p>
-                        <p><b>Acteurs : </b><span lazy="/api/movies/{{movie.id}}/actors">Plus d'infos ...</span></p>
+                    <p><b>Acteurs : </b><span lazy="/api/movies/{{movie.id}}/actors">Plus d'infos ...</span></p>
+
                 </div>
             </li>
         </ul>
