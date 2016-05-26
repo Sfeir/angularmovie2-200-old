@@ -1,4 +1,4 @@
-import {Directive, ElementRef,EventEmitter,Inject} from 'angular2/core';
+import {Directive, ElementRef,EventEmitter,Inject} from '@angular/core';
 
 @Directive({
     selector: '[highlight]',
