@@ -1,8 +1,8 @@
-import {Component} from 'angular2/core';
-import {RouteConfig, ROUTER_DIRECTIVES, Router} from 'angular2/router'
-import {HomeComponent} from '../components/home/Home'
-import {MoviesComponent} from '../components/movies/Movies'
-import {EditMovieComponent} from '../components/editMovie/EditMovie'
+import {Component} from '@angular/core';
+import {RouteConfig, ROUTER_DIRECTIVES} from '@angular/router-deprecated';
+import {HomeComponent} from '../components/home/Home';
+import {EditMovieComponent} from '../components/editMovie/EditMovie';
+import {MoviesComponent} from '../components/movies/Movies';
 
 @Component({
     selector: 'movies-app',
@@ -10,13 +10,9 @@ import {EditMovieComponent} from '../components/editMovie/EditMovie'
     directives:[ROUTER_DIRECTIVES]
 })
 @RouteConfig([
-    { path: '/', redirectTo: ['/Movies'] },
-    { path: '/home', name: 'Home', component: HomeComponent },
-    { path: '/movies', name: 'Movies', component: MoviesComponent },
-    { path: '/movies/edit/:id', name: 'Editmovie', component: EditMovieComponent }
+  { path: '/', name: 'Home', component: HomeComponent },
+  { path: '/home', name: 'Home', component: HomeComponent },
+  { path: '/movies', name: 'Movies', component: MoviesComponent },
+  { path: '/movies/edit/:id', name:'EditMovie', component: EditMovieComponent }
 ])
-export class App {
-    constructor(router:Router) {
-
-    }
-}
+export class App {}
