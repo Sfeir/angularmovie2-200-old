@@ -1,5 +1,4 @@
 import {Component} from '@angular/core';
-import {NgFor} from '@angular/common';
 import {MovieFormComponent} from '../movieForm/MovieFormComponent';
 import {Http,Headers} from '@angular/http';
 import {ROUTER_DIRECTIVES} from '@angular/router-deprecated';
@@ -10,7 +9,7 @@ import 'rxjs/add/observable/interval';
 @Component({
     selector: 'movies',
     templateUrl: 'ts/components/movies/movies.html',
-    directives: [NgFor,MovieFormComponent,ROUTER_DIRECTIVES]
+    directives: [MovieFormComponent,ROUTER_DIRECTIVES]
 })
 export class MoviesComponent {
     name:string;
