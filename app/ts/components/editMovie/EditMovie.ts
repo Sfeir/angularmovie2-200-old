@@ -6,7 +6,7 @@ import {Http,Headers} from '@angular/http';
 @Component({
     selector: 'edit-movie',
     templateUrl: 'ts/components/editMovie/editMovie.html',
-    directives: [CORE_DIRECTIVES, FORM_DIRECTIVES, RouterLink]
+    directives: [FORM_DIRECTIVES, RouterLink]
 })
 export class EditMovieComponent {
     id:string;
