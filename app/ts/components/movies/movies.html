@@ -6,7 +6,7 @@
 </header>
 
 <ul class="thumbnails">
-    <li *ngFor="let movie of movies" class="movieResult" class="span12">
+    <li *ngFor="let movie of movies; let i = index" class="movieResult" class="span12">
         <img [src]="movie.poster || 'img/no-poster.jpg'" class="span2">
         <div class="caption">
             <h3>{{movie.title}}
