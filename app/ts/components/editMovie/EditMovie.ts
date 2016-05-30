@@ -1,7 +1,7 @@
-import {Component} from 'angular2/core';
-import {CORE_DIRECTIVES, FORM_DIRECTIVES} from 'angular2/common';
-import {Router,RouterLink,RouteParams} from 'angular2/router'
-import {Http,Headers} from 'angular2/http';
+import {Component} from '@angular/core';
+import {FORM_DIRECTIVES} from '@angular/common';
+import {Router,RouterLink,RouteParams} from '@angular/router-deprecated'
+import {Http,Headers} from '@angular/http';
 
 @Component({
     selector: 'edit-movie',
