@@ -1,5 +1,5 @@
-import {Component} from 'angular2/core';
-import {RouteConfig, ROUTER_DIRECTIVES, Router} from 'angular2/router'
+import {Component} from '@angular/core';
+import {RouteConfig, ROUTER_DIRECTIVES} from '@angular/router-deprecated'
 import {HomeComponent} from '../components/home/Home'
 import {MoviesComponent} from '../components/movies/Movies'
 
@@ -9,12 +9,12 @@ import {MoviesComponent} from '../components/movies/Movies'
     directives:[ROUTER_DIRECTIVES]
 })
 @RouteConfig([
-    { path: '/', redirectTo: ['/Movies'] },
+    { path: '/', name: 'Home', component: HomeComponent },
     { path: '/home', name: 'Home', component: HomeComponent },
     { path: '/movies', name: 'Movies', component: MoviesComponent }
 ])
 export class App {
-    constructor(router:Router) {
+    constructor() {
 
     }
 }
