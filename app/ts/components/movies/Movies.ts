@@ -1,8 +1,10 @@
 import {Component} from '@angular/core';
+import {MovieFormComponent} from '../movieForm/MovieFormComponent';
 
 @Component({
     selector: 'movies',
-    templateUrl: 'ts/components/movies/movies.html'
+    templateUrl: 'ts/components/movies/movies.html',
+    directives: [MovieFormComponent]
 })
 export class MoviesComponent {
     name:string;
