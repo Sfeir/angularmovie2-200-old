@@ -1,10 +1,8 @@
-import {Component} from 'angular2/core';
-import {NgFor} from 'angular2/common';
+import {Component} from '@angular/core';
 
 @Component({
     selector: 'movies',
-    templateUrl: 'ts/components/movies/movies.html',
-    directives: [NgFor]
+    templateUrl: 'ts/components/movies/movies.html'
 })
 export class MoviesComponent {
     name:string;
