@@ -1,5 +1,5 @@
-import {Directive, ElementRef} from 'angular2/core';
-import {Http} from 'angular2/http';
+import {Directive, ElementRef} from '@angular/core';
+import {Http} from '@angular/http';
 
 @Directive({
     selector: '[lazy]',
