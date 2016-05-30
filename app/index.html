@@ -2,6 +2,7 @@
 <html>
 <head>
     <title>AngularMovie</title>
+    <base href="/" target="_blank" />
     <meta charset="UTF-8">
     <link rel="stylesheet" href="lib/bootstrap.css/css/bootstrap.min.css">
     <link rel="stylesheet" href="css/app.css">
@@ -9,11 +10,6 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" href="lib/bootstrap.css/css/bootstrap.min.css">
     <link rel="stylesheet" href="css/app.css">
-    <script src="es6-shim/es6-shim.js"></script>
-    <script src="angular2/bundles/angular2-polyfills.js"></script>
-    <script src="systemjs/dist/system.src.js"></script>
-    <script src="rxjs/bundles/Rx.js"></script>
-    <script src="angular2/bundles/angular2.dev.js"></script>
 </head>
 <body>
 
@@ -36,11 +32,16 @@
     <home></home>
 </section>
 
+<script src="lib/jquery/jquery.js"></script>
+<script src="lib/bootstrap.css/js/bootstrap.js"></script>
+<script src="es6-shim/es6-shim.js"></script>
+<script src="reflect-metadata/Reflect.js"></script>
+<script src="systemjs/dist/system.src.js"></script>
+<script src="zone.js/dist/zone.js"></script>
 <script>
-    System.config({
-        packages: {'ts': {defaultExtension: 'js'}}
-    });
-    System.import('ts/bootstrapHome');
+    System.import('system-config.js').then(function () {
+        System.import('main');
+    }).catch(console.error.bind(console));
 </script>
 
 </body>
