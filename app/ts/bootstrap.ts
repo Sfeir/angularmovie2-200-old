@@ -1,5 +1,1 @@
-import {bootstrap} from 'angular2/platform/browser';
-import {MoviesComponent} from './components/movies/Movies';
-
-
-bootstrap(MoviesComponent);
+import {bootstrap} from '@angular/platform-browser-dynamic';
