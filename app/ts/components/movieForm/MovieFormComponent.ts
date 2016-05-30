@@ -1,9 +1,9 @@
-import {Component, EventEmitter} from 'angular2/core';
-import {FORM_DIRECTIVES} from 'angular2/common';
+import {Component, EventEmitter} from '@angular/core';
+import {FORM_DIRECTIVES} from '@angular/common';
 
 @Component({
     selector: 'movie-form',
-    output: ['movieAdd'],
+    outputs: ['movieAdd'],
     templateUrl: 'ts/components/movieForm/movie-form.html',
     directives:[FORM_DIRECTIVES]
 })
