@@ -1,6 +1,7 @@
 import {Component} from '@angular/core';
 import {MovieFormComponent} from '../movieForm/MovieFormComponent';
 import {MoviesService} from '../../services/MoviesService';
+import {RatePipe} from '../../pipes/RatePipe';
 import {ROUTER_DIRECTIVES} from '@angular/router-deprecated';
 import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
@@ -9,7 +10,8 @@ import 'rxjs/add/observable/interval';
 @Component({
     selector: 'movies',
     templateUrl: 'ts/components/movies/movies.html',
-    directives: [MovieFormComponent,ROUTER_DIRECTIVES]
+    directives: [MovieFormComponent,ROUTER_DIRECTIVES],
+    pipes:[RatePipe]
 })
 export class MoviesComponent {
     name:string;
