@@ -1,5 +1,10 @@
 import {Component} from '@angular/core';
+import { Http, Headers } from '@angular/http';
 import {MovieFormComponent} from '../movieForm/MovieFormComponent';
+
+import {Observable} from 'rxjs/Observable';
+import 'rxjs/add/operator/map';
+import 'rxjs/add/observable/interval';
 
 @Component({
     selector: 'movies',
