@@ -27,7 +27,7 @@ export class EditMovieComponent {
                 releaseYear: ["", Validators.required],
                 directors: [""],
                 actors: [""],
-                rate: ["", this.getRangeNumberValidator(1, 5)]
+                rate: ["", this.getRangeNumberValidator(1,5)]
             }
         );
 
@@ -63,7 +63,7 @@ export class EditMovieComponent {
 
     getRangeNumberValidator(min, max) {
         return function (c:Control):any {
-            if (c.value) {
+            if (c.value || c.value==0) {
                 var val = parseInt(c.value);
                 //it's a number ?
                 if (isNaN(val)) {
