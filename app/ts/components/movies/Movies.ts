@@ -1,12 +1,7 @@
-import {Component} from 'angular2/core';
-import {CORE_DIRECTIVES} from 'angular2/common';
+import {Component} from '@angular/core';
+import {NgFor} from '@angular/common';
 import {MovieFormComponent} from '../movieForm/MovieFormComponent';
-import {RouterLink} from 'angular2/router'
-import {MoviesService} from '../../services/MoviesService';
-import {RatePipe} from '../../pipes/RatePipe';
-import {Highlight} from '../../directives/Highlight';
-import {Lazy} from '../../directives/Lazy';
-
+import {Http,Headers} from '@angular/http';
 import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/observable/interval';

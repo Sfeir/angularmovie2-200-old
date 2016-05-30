@@ -12,28 +12,18 @@
 </header>
 <div [ngSwitch]="displayTable">
 
-    <template [ngSwitchWhen]="true">
-        <table class="table table-striped">
-            <thead>
-            <tr>
-                <th>#</th>
-                <th>Titre</th>
-                <th>Réalisateur</th>
-                <th>Année de sortie</th>
-                <th>Note</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr *ngFor="#movie of movies;#i = index">
-                <td>{{i + 1}}</td>
-                <td><a [routerLink]="['/Editmovie',{id:movie.id}]">{{movie.title}}</a></td>
-                <td>{{movie.directors}}</td>
-                <td>{{movie.releaseYear}}</td>
-                <td>{{movie.rate}}</td>
-            </tr>
-            </tbody>
-        </table>
-    </template>
+<ul class="thumbnails">
+    <li *ngFor="let movie of movies" class="movieResult" class="span12">
+        <img [src]="movie.poster || 'img/no-poster.jpg'" class="span2">
+        <div class="caption">
+            <h3>{{movie.title}}</h3>
+            <p><b>Année de sortie : </b>{{movie.releaseYear}}</p>
+            <p><b>Réalisateur : </b>{{movie.directors}}</p>
+            <p><b>Acteurs : </b>{{movie.actors}}</p>
+            <p><b>Synopsis : </b>{{movie.synopsis}}</p>
+        </div>
+    </li>
+</ul>
 
     <template [ngSwitchWhen]="false">
         <ul class="thumbnails">
