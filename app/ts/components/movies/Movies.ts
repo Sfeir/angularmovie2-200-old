@@ -1,11 +1,8 @@
-import {Component} from 'angular2/core';
-import {NgFor} from 'angular2/common';
-import {MovieFormComponent} from '../movieForm/MovieFormComponent';
+import {Component} from '@angular/core';
 
 @Component({
     selector: 'movies',
-    templateUrl: 'ts/components/movies/movies.html',
-    directives: [NgFor,MovieFormComponent]
+    templateUrl: 'ts/components/movies/movies.html'
 })
 export class MoviesComponent {
     name:string;
