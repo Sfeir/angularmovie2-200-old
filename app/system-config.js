@@ -25,6 +25,7 @@ System.config({
         '@angular': '@angular',
         'rxjs': 'rxjs',
         'main': 'ts/bootstrapHome.js',
+        'main2': 'ts/bootstrap.js',
         'app': 'app'
     },
     packages: cliSystemConfigPackages
