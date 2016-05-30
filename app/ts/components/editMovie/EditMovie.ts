@@ -64,7 +64,7 @@ export class EditMovieComponent {
 
     getRangeNumberValidator(min, max) {
         return function (c:Control):any {
-            if (c.value) {
+            if (c.value || c.value==0) {
                 var val = parseInt(c.value);
                 //it's a number ?
                 if (isNaN(val)) {
