@@ -24,7 +24,7 @@ System.config({
     map: {
         '@angular': '@angular',
         'rxjs': 'rxjs',
-        'main': 'ts/bootstrapHome.js',
+        'main': 'ts/bootstrap.js',
         'app': 'app'
     },
     packages: cliSystemConfigPackages
