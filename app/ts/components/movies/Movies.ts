@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 import {MovieFormComponent} from '../movieForm/MovieFormComponent';
-import {Http,Headers} from '@angular/http';
+import {MoviesService} from '../../services/MoviesService';
 import {ROUTER_DIRECTIVES} from '@angular/router-deprecated';
 import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
