@@ -1,7 +1,7 @@
 import {Component} from '@angular/core';
 import {FORM_DIRECTIVES, FormBuilder, Validators, ControlGroup, Control} from '@angular/common';
 import {Router,RouterLink,RouteParams} from '@angular/router-deprecated'
-import {Http,Headers} from '@angular/http';
+import {MoviesService} from '../../services/MoviesService';
 
 @Component({
     selector: 'edit-movie',
