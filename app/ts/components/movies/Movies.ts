@@ -2,6 +2,7 @@ import {Component} from '@angular/core';
 import {NgFor} from '@angular/common';
 import {MovieFormComponent} from '../movieForm/MovieFormComponent';
 import {Http,Headers} from '@angular/http';
+import {ROUTER_DIRECTIVES} from '@angular/router-deprecated';
 import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/observable/interval';
@@ -9,8 +10,7 @@ import 'rxjs/add/observable/interval';
 @Component({
     selector: 'movies',
     templateUrl: 'ts/components/movies/movies.html',
-    directives: [CORE_DIRECTIVES,MovieFormComponent,RouterLink,Highlight,Lazy],
-    pipes:[RatePipe]
+    directives: [NgFor,MovieFormComponent,ROUTER_DIRECTIVES]
 })
 export class MoviesComponent {
     name:string;
