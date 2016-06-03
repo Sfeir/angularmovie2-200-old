@@ -1,4 +1,4 @@
-import {Directive, ElementRef,EventEmitter,Inject} from '@angular/core';
+import {Directive, ElementRef,EventEmitter,Renderer,Inject} from '@angular/core';
 
 @Directive({
     selector: '[highlight]',
@@ -13,9 +13,11 @@ import {Directive, ElementRef,EventEmitter,Inject} from '@angular/core';
 export class Highlight {
     message:string;
     element:ElementRef;
+    renderer:Renderer;
 
-    constructor(element:ElementRef) {
+    constructor(element:ElementRef, renderer:Renderer) {
         this.element=element;
+        this.renderer=renderer;
     }
 
     onClick($event) {
@@ -31,6 +33,6 @@ export class Highlight {
     }
 
     color(color:string = "") {
-        this.element.nativeElement.style.color = color;
+        this.renderer.setElementStyle(this.element.nativeElement, 'color', color);
     }
 }
