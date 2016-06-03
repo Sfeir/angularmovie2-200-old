@@ -30,7 +30,7 @@ export class Lazy {
     }
 
     setInner(content) {
-      this.renderer.setElementProperty(this.element, 'innerHTML', content);
+      this.renderer.setElementProperty(this.element.nativeElement, 'innerHTML', content);
       this.hasLoad = true;
     }
 }

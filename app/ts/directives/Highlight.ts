@@ -33,6 +33,6 @@ export class Highlight {
     }
 
     color(color:string = "") {
-        this.renderer.setElementStyle(this.element, 'color', color);
+        this.renderer.setElementStyle(this.element.nativeElement, 'color', color);
     }
 }
