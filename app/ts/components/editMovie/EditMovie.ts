@@ -1,13 +1,12 @@
-import {Component} from 'angular2/core';
-import {CORE_DIRECTIVES, FORM_DIRECTIVES, FormBuilder, Validators, ControlGroup, Control} from 'angular2/common';
-import {Router,RouterLink,RouteParams} from 'angular2/router'
+import {Component} from '@angular/core';
+import {FORM_DIRECTIVES, FormBuilder, Validators, ControlGroup, Control} from '@angular/common';
+import {Router,RouterLink,RouteParams} from '@angular/router-deprecated'
 import {MoviesService} from '../../services/MoviesService';
-
 
 @Component({
     selector: 'edit-movie',
     templateUrl: 'ts/components/editMovie/editMovie.html',
-    directives: [CORE_DIRECTIVES, FORM_DIRECTIVES, RouterLink]
+    directives: [FORM_DIRECTIVES, RouterLink]
 })
 export class EditMovieComponent {
     id:string;
@@ -28,7 +27,7 @@ export class EditMovieComponent {
                 releaseYear: ["", Validators.required],
                 directors: [""],
                 actors: [""],
-                rate: ["", this.getRangeNumberValidator(1, 5)]
+                rate: ["", this.getRangeNumberValidator(1,5)]
             }
         );
 
@@ -64,7 +63,7 @@ export class EditMovieComponent {
 
     getRangeNumberValidator(min, max) {
         return function (c:Control):any {
-            if (c.value) {
+            if (c.value || c.value==0) {
                 var val = parseInt(c.value);
                 //it's a number ?
                 if (isNaN(val)) {
