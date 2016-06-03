@@ -1,4 +1,4 @@
-import {Directive, ElementRef} from 'angular2/core';
+import {Directive, ElementRef, Renderer} from 'angular2/core';
 import {Http} from 'angular2/http';
 
 @Directive({
@@ -13,10 +13,12 @@ export class Lazy {
     url:string;
     element:ElementRef;
     http:Http;
+    renderer:Renderer;
 
-    constructor(element:ElementRef,http:Http) {
+    constructor(element:ElementRef,renderer:Renderer,http:Http) {
         this.element = element;
         this.http = http;
+        this.renderer = renderer;
     }
 
     load() {
@@ -28,7 +30,7 @@ export class Lazy {
     }
 
     setInner(content) {
-        this.element.nativeElement.innerHTML = content;
-        this.hasLoad = true;
+      this.renderer.setElementProperty(this.element, 'innerHTML', content);
+      this.hasLoad = true;
     }
 }
