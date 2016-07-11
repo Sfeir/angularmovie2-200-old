@@ -5,7 +5,6 @@ var barrels = [
   '@angular/compiler',
   '@angular/http',
   '@angular/router-deprecated',
-  '@angular/router-deprecated',
   '@angular/platform-browser',
   '@angular/platform-browser-dynamic',
 
