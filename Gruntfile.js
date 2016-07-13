@@ -51,7 +51,8 @@ module.exports = function (grunt) {
 
         ts: {
             dev : {
-                src: ["<%= yeoman.app %>/ts/**/*.ts", "!node_modules/**/*.ts"],
+                src: ["typings/main.d.ts", "<%= yeoman.app %>/ts/**/*.ts", "!node_modules/**/*.ts"],
+                outDir: "./tmp",
                 options: {
                     "fast":'always',
                     "module": "commonjs",
@@ -59,7 +60,7 @@ module.exports = function (grunt) {
                     "experimentalDecorators": true,
                     "removeComments": false,
                     "noImplicitAny": false,
-                    "failOnTypeErrors": false
+                    "failOnTypeErrors": false,
                 }
             }
         }
