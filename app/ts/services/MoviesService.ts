@@ -11,7 +11,7 @@ export class MoviesService {
         return this.http.get('api/movies')
             .map(res => res.json());
     }
-    getMovie(id:string) {
+    getMovie(id:number) {
         return this.http.get('api/movies/'+id)
             .map(res => res.json());
     }

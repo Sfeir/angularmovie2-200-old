@@ -45,7 +45,7 @@
         </form>
     </section>
     <footer>
-        <a [routerLink]="['Movies']" data-dismiss="modal" class="btn btn-danger btn-small">Annuler</a>
+        <a [routerLink]="['/movies']" data-dismiss="modal" class="btn btn-danger btn-small">Annuler</a>
         <button class="btn btn-success" [disabled]="!movieForm.valid" (click)="editMovie()">Modifier</button>
     </footer>
 

@@ -1,14 +1,10 @@
 import {Component} from '@angular/core';
-import {ROUTER_DIRECTIVES} from '@angular/router-deprecated';
+import {ROUTER_DIRECTIVES} from '@angular/router';
 import {MovieFormComponent} from '../movieForm/MovieFormComponent';
 import {MoviesService} from '../../services/MoviesService';
 import {RatePipe} from '../../pipes/RatePipe';
 import {Highlight} from '../../directives/Highlight';
 import {Lazy} from '../../directives/Lazy';
-
-import {Observable} from 'rxjs/Observable';
-import 'rxjs/add/operator/map';
-import 'rxjs/add/observable/interval';
 
 @Component({
     selector: 'movies',
@@ -19,9 +15,10 @@ import 'rxjs/add/observable/interval';
       Highlight,
       Lazy
     ],
+    providers: [MoviesService],
     pipes:[RatePipe]
 })
-export class MoviesComponent {
+export class MoviesListComponent {
     name:string;
     movies:any;
     moviesService: MoviesService;

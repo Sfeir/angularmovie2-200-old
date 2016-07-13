@@ -1,26 +1,28 @@
 import {Component} from '@angular/core';
-import {CORE_DIRECTIVES, FORM_DIRECTIVES, FormBuilder, Validators, ControlGroup, Control} from '@angular/common';
-import {Router,RouterLink,RouteParams} from '@angular/router-deprecated';
+import {FormBuilder, Validators, ControlGroup, Control} from '@angular/common';
+import {ActivatedRoute, Router, ROUTER_DIRECTIVES} from '@angular/router';
 import {MoviesService} from '../../services/MoviesService';
 
 
 @Component({
     selector: 'edit-movie',
     templateUrl: 'ts/components/editMovie/editMovie.html',
-    directives: [CORE_DIRECTIVES, FORM_DIRECTIVES, RouterLink]
+    directives: [ROUTER_DIRECTIVES],
+    providers: [MoviesService]
 })
 export class EditMovieComponent {
-    id:string;
-    router:Router;
+    id:number;
     movie:any;
     movieForm:ControlGroup;
     moviesService:MoviesService;
 
-
-    constructor(router:Router, routeParams:RouteParams, builder:FormBuilder, moviesService:MoviesService) {
-        this.router = router;
-        this.moviesService=moviesService;
-        this.id = routeParams.get('id');
+    constructor(
+      private route: ActivatedRoute,
+      private router: Router,
+      builder:FormBuilder,
+      moviesService:MoviesService
+    ) {
+        this.moviesService = moviesService;
         this.movie = {};
         this.movieForm = builder.group(
             {
@@ -32,20 +34,24 @@ export class EditMovieComponent {
             }
         );
 
-        if (this.id) {
-            this.getMovie(this.id);
-        }
     }
 
-    getMovie(id:String) {
+    ngOnInit() {
+      this.route.params.subscribe(params => {
+         this.id = +params['id'];
+         this.getMovie(this.id);
+       });
+    }
+
+    getMovie(id:number) {
         this.moviesService.getMovie(this.id)
             .subscribe((movie)=> {
                 this.movie = movie;
-                this.movieForm.controls['title'].updateValue(this.movie.title);
-                this.movieForm.controls['releaseYear'].updateValue(this.movie.releaseYear);
-                this.movieForm.controls['directors'].updateValue(this.movie.directors);
-                this.movieForm.controls['actors'].updateValue(this.movie.actors);
-                this.movieForm.controls['rate'].updateValue(this.movie.rate);
+                (<Control>this.movieForm.controls['title']).updateValue(this.movie.title);
+                (<Control>this.movieForm.controls['releaseYear']).updateValue(this.movie.releaseYear);
+                (<Control>this.movieForm.controls['directors']).updateValue(this.movie.directors);
+                (<Control>this.movieForm.controls['actors']).updateValue(this.movie.actors);
+                (<Control>this.movieForm.controls['rate']).updateValue(this.movie.rate);
             });
     }
 
@@ -58,7 +64,7 @@ export class EditMovieComponent {
 
         this.moviesService.updateMovie(this.movie)
             .subscribe(()=> {
-                this.router.navigate(['Movies']);
+                this.router.navigate(['/movies']);
             });
     }
 
