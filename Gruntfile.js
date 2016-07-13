@@ -22,7 +22,8 @@ module.exports = function (grunt) {
         yeoman: {
             // Configurable paths
             app: 'app',
-            dist: 'dist'
+            dist: 'dist',
+            tmp: '.tmp'
         },
 
         // Watches files for changes and runs tasks based on the changed files
@@ -40,21 +41,21 @@ module.exports = function (grunt) {
                 options: {
                     livereload: false,
                     serverreload: false,
-                    open:true,
-                    bases: [path.resolve('./.tmp'), path.resolve(__dirname, '<%= yeoman.app %>')]
+                    open: true,
+                    bases: [path.resolve('<%= yeoman.tmp %>')]
                 }
             }
         },
         clean: {
-            server: '.tmp'
+            server: '<%= yeoman.tmp %>'
         },
 
         ts: {
             dev : {
                 src: ["typings/main.d.ts", "<%= yeoman.app %>/ts/**/*.ts", "!node_modules/**/*.ts"],
-                outDir: "./tmp",
+                outDir: "<%= yeoman.tmp %>",
                 options: {
-                    "fast":'always',
+                    "fast":'watch',
                     "module": "commonjs",
                     "emitDecoratorMetadata": true,
                     "experimentalDecorators": true,
