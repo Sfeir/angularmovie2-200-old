@@ -7,6 +7,6 @@ import {Component} from '@angular/core';
 export class HomeComponent {
     name:string;
     constructor(){
-        this.name='Cyril';
+        this.name = 'Médiamétrie';
     }
 }
