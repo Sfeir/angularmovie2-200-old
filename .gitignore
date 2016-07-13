@@ -1,11 +1,9 @@
 .DS_Store
 .idea/
 .tscache/
+.baseDir.ts
 AngularMovie.iml
 node_modules/
 app/lib/
-app/ts/**/*.map
-app/ts/**/*.js
-tmp/
+.tmp/
 typings/
-.baseDir.ts

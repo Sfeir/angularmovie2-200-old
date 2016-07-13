@@ -16,7 +16,7 @@
     "url": "https://github.com/Sfeir/angularmovie2-200/issues"
   },
   "scripts": {
-    "start": "node server.js"
+    "install": "typings install --ambiant"
   },
   "dependencies": {
     "@angular/common": "2.0.0-rc.4",
